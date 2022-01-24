@@ -43,12 +43,14 @@
 								<a href="#" title="Voir Plus">
 									<i class="bx bx-link"></i>
 								</a>
+								{% if is_granted('ROLE_USER') %}
 								<a href="#" title="Editer">
 									<i style="color: green;" class="bx bx-edit"></i>
 								</a>
 								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
 									<i style="color: red;" class="bx bx-trash"></i>
 								</a>
+								{% endif %}
 							</div>
 						</div>
 					</div>
