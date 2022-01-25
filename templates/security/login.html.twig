@@ -5,9 +5,11 @@
 
 {% block body %}
 
-	<!-- ======= Hero Section ======= -->
-	<section id="hero">
-		<div class="hero-container" data-aos="fade-up">
+	<!-- ======= Hero Section form ======= -->
+	<section id="heroform" style="
+  background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)), 
+  url('img/hero-bg.jpg') top center;">
+    <div class="heroform-container" data-aos="fade-up">
 
 			<div class="section-title">
 				<h1>Connectez vous !</h1>
@@ -32,10 +34,11 @@
 					<label for="inputPassword">Mot de passe</label>
 					<input type="password" name="password" id="inputPassword" class="form-control" required>
 
+					<div class="blockcenter">
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"><br>
 
 					<button class="btn btn btn-primary" type="submit">Valider</button>
-				</form>
+				</form><br>
 
 				<a href="#">
 					<h7 class="text-white">Mot de passe oublié ?</h7>
@@ -46,6 +49,7 @@
 						<button class="btn btn-primary">Pas encore de compte ? Inscrivez-vous</button>
 					</a>
 				</h2>
+				</div>
 			</div>
 		</div>
 	</section>
