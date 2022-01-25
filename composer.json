@@ -87,6 +87,11 @@
         "symfony/polyfill-php80": "*"
     },
     "scripts": {
+        "cs-fix": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix src",
+
+        "scripts-descriptions": {
+            "cs-fix": "Exécute PHP-CS-Fixer dans le projet et corriges les erreurs"
+        },
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
