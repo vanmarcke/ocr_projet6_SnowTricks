@@ -12,6 +12,6 @@ class HomeControllerTest extends WebTestCase
         $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello HomeController!');
+        $this->assertSelectorTextContains('h1', 'Bienvenue sur SnowTricks', 'h2', 'Les Figures');
     }
 }

@@ -1,0 +1,71 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top header-transparent">
+	<div class="container d-flex align-items-center justify-content-between">
+
+		<div class="logo">
+			<a href="{{ path('home')}} "><img src="img/logo.png" alt="" class="img-fluid"></a>
+		</div>
+
+		<div
+			class="d-none d-lg-block">
+			<!-- La navbar est cachée sur petit écran et apparait sur grand écran-->
+			<nav id="navbar" class="navbar">
+				<ul>
+					<li>
+						<a class="nav-link scrollto" href="{{ path('home')}}">Accueil</a>
+					</li>
+					<li>
+						<a class="nav-link scrollto" href="#">Tricks</a>
+					</li>
+					<li>
+						{% if is_granted('ROLE_USER') %}
+							<a class="nav-link scrollto" href="#">Ajouter Trick</a>
+						</li>
+					</li>
+					<li>
+						<a class="nav-link scrollto" href="#">Profil</a>
+					</li>
+					<li>
+						<a class="nav-link scrollto" href="#">Déconnexion</a>
+					</li>
+				{% else %}
+					<li>
+						<a class="nav-link scrollto" href="#">Connexion</a>
+					</li>
+				{% endif %}
+			</ul>
+			<i class="bi bi-list mobile-nav-toggle"></i>
+		</nav>
+		<!-- .navbar -->
+	</div>
+
+	<div
+		class="d-lg-none">
+		<!-- Navbar avec icônes sur petit écran, disparait sur grand écran -->
+		<nav class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-info">
+			<div class="navbar">
+				<a class="nav-link" href="{{ path('home')}}">
+					<h3 class="far fa-home"></h3>
+				</a>
+				<a class="nav-link" href="#">
+					<h3 class="far fa-snowboarding"></h3>
+				</a>
+				{% if is_granted('ROLE_USER') %}
+					<a class="nav-link" href="#">
+						<h3 class="far fa-plus-square"></h3>
+					</a>
+					<a class="nav-link" href="#">
+						<h3 class="far fa-user"></h3>
+					</a>
+					<a class="nav-link" href="#">
+						<h3 class="far fa-sign-out-alt"></h3>
+					</a>
+				{% else %}
+					<a class="nav-link" href="#">
+						<h3 class="far fa-sign-in-alt"></h3>
+					</a>
+				{% endif %}
+			</div>
+		</nav>
+	</div>
+</div></header><!-- End Header -->

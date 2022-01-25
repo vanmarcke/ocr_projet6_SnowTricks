@@ -1,20 +1,168 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<!-- ======= Hero Section ======= -->
+	<section id="hero">
+		<div class="hero-container" data-aos="fade-up">
+			<h1>Bienvenue sur SnowTricks</h1>
+			<h2>Le site communautaire qui regroupe tous les tricks du Snowboard</h2>
+			<a href="#portfolio" class="btn-get-started scrollto">
+				<i class="bx bx-chevrons-down"></i>
+			</a>
+		</div>
+	</section>
+	<!-- End Hero -->
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Fred Isa et Jay/Desktop/Snowtricks/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Fred Isa et Jay/Desktop/Snowtricks/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<main
+		id="main">
+
+		<!-- ======= Figures Section ======= -->
+		<section id="portfolio" class="portfolio">
+			<div class="container">
+
+				<div class="section-title" data-aos="fade-in" data-aos-delay="100">
+					<h2>Les Figures</h2>
+				</div>
+
+				<div class="row portfolio-container" data-aos="fade-up">
+
+					<div class="col-lg-3 col-md-6 portfolio-item">
+						<div class="section-namefig text-center">
+							<h2>Nom1</h2>
+						</div>
+						<div class="portfolio-wrap">
+							<img src="img/indy.jpg" class="img-fluid" alt="">
+							<div class="portfolio-links">
+								<a href="img/indy.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom1">
+									<i class="bx bx-plus"></i>
+								</a>
+								<a href="#" title="Voir Plus">
+									<i class="bx bx-link"></i>
+								</a>
+								{% if is_granted('ROLE_USER') %}
+								<a href="#" title="Editer">
+									<i style="color: green;" class="bx bx-edit"></i>
+								</a>
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+									<i style="color: red;" class="bx bx-trash"></i>
+								</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6 portfolio-item">
+						<div class="section-namefig text-center">
+							<h2>Nom2</h2>
+						</div>
+						<div class="portfolio-wrap">
+							<img src="img/japan.jpg" class="img-fluid" alt="">
+							<div class="portfolio-links">
+								<a href="img/japan.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom2">
+									<i class="bx bx-plus"></i>
+								</a>
+								<a href="#" title="Voir Plus">
+									<i class="bx bx-link"></i>
+								</a>
+								<a href="#" title="Editer">
+									<i style="color: green;" class="bx bx-edit"></i>
+								</a>
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+									<i style="color: red;" class="bx bx-trash"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6 portfolio-item">
+						<div class="section-namefig text-center">
+							<h2>Nom3</h2>
+						</div>
+						<div class="portfolio-wrap">
+							<img src="img/nosegrab.jpg" class="img-fluid" alt="">
+							<div class="portfolio-links">
+								<a href="img/nosegrab.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom3">
+									<i class="bx bx-plus"></i>
+								</a>
+								<a href="#" title="Voir Plus">
+									<i class="bx bx-link"></i>
+								</a>
+								<a href="#" title="Editer">
+									<i style="color: green;" class="bx bx-edit"></i>
+								</a>
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+									<i style="color: red;" class="bx bx-trash"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6 portfolio-item">
+						<div class="section-namefig text-center">
+							<h2>Nom4</h2>
+						</div>
+						<div class="portfolio-wrap">
+							<img src="img/sad.jpg" class="img-fluid" alt="">
+							<div class="portfolio-links">
+								<a href="img/sad.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom4">
+									<i class="bx bx-plus"></i>
+								</a>
+								<a href="#" title="Voir Plus">
+									<i class="bx bx-link"></i>
+								</a>
+								<a href="#" title="Editer">
+									<i style="color: green;" class="bx bx-edit"></i>
+								</a>
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+									<i style="color: red;" class="bx bx-trash"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-6 portfolio-item">
+						<div class="section-namefig text-center">
+							<h2>Nom5</h2>
+						</div>
+						<div class="portfolio-wrap">
+							<img src="img/tailgrab.jpg" class="img-fluid" alt="">
+							<div class="portfolio-links">
+								<a href="img/tailgrab.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom5">
+									<i class="bx bx-plus"></i>
+								</a>
+								<a href="#" title="Voir Plus">
+									<i class="bx bx-link"></i>
+								</a>
+								<a href="#" title="Editer">
+									<i style="color: green;" class="bx bx-edit"></i>
+								</a>
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+									<i style="color: red;" class="bx bx-trash"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 contact section-bg mx-auto">
+					<form action="" method="post" role="form" class="php-email-form">
+						<div class="text-center">
+							<button type="submit">Voir plus</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</section>
+		<!-- End figures Section -->
+
+		{% include "home/modal.html.twig" %}
+
+	</main>
+	<!-- End #main -->
+
 {% endblock %}
