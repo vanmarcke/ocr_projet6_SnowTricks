@@ -8,10 +8,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
- */
+
 #[ORM\Entity(repositoryClass: SnoUserRepository::class)]
+#[UniqueEntity(fields: "email", message: "Cet email est déjà utilisé !")]
+#[UniqueEntity(fields: "username", message: "Il existe déjà un compte avec cette identifiant")]
 class SnoUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -28,7 +28,7 @@ class SnoUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private string $email;
 
     #[ORM\Column(type: 'datetime')]
