@@ -12,7 +12,7 @@
 			<nav id="navbar" class="navbar">
 				<ul>
 					<li>
-						<a class="nav-link scrollto" href="{{ path('home')}}">Accueil</a>
+						<a class="nav-link scrollto" href="{{ path('home') }}">Accueil</a>
 					</li>
 					<li>
 						<a class="nav-link scrollto" href="#">Tricks</a>
@@ -26,11 +26,11 @@
 						<a class="nav-link scrollto" href="#">Profil</a>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="#">Déconnexion</a>
+						<a class="nav-link scrollto" href="{{ path('app_logout') }}">Déconnexion</a>
 					</li>
 				{% else %}
 					<li>
-						<a class="nav-link scrollto" href="#">Connexion</a>
+						<a class="nav-link scrollto" href="{{ path('app_login') }}">Connexion</a>
 					</li>
 				{% endif %}
 			</ul>
@@ -44,7 +44,7 @@
 		<!-- Navbar avec icônes sur petit écran, disparait sur grand écran -->
 		<nav class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-info">
 			<div class="navbar">
-				<a class="nav-link" href="{{ path('home')}}">
+				<a class="nav-link" href="{{ path('home') }}">
 					<h3 class="far fa-home"></h3>
 				</a>
 				<a class="nav-link" href="#">
@@ -57,11 +57,11 @@
 					<a class="nav-link" href="#">
 						<h3 class="far fa-user"></h3>
 					</a>
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{{ path('app_logout') }}">
 						<h3 class="far fa-sign-out-alt"></h3>
 					</a>
 				{% else %}
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{{ path('app_login') }}">
 						<h3 class="far fa-sign-in-alt"></h3>
 					</a>
 				{% endif %}

@@ -1,15 +1,12 @@
 {
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99.4"
-    },
     "composer/pcre": {
-        "version": "1.0.0"
+        "version": "1.0.1"
     },
     "composer/semver": {
         "version": "3.2.7"
     },
     "composer/xdebug-handler": {
-        "version": "2.0.4"
+        "version": "3.0.1"
     },
     "doctrine/annotations": {
         "version": "1.13",
@@ -33,7 +30,7 @@
         "version": "3.2.1"
     },
     "doctrine/dbal": {
-        "version": "3.2.1"
+        "version": "3.3.0"
     },
     "doctrine/deprecations": {
         "version": "v0.5.3"
@@ -80,7 +77,7 @@
         "version": "1.2.2"
     },
     "doctrine/migrations": {
-        "version": "3.3.2"
+        "version": "3.4.0"
     },
     "doctrine/orm": {
         "version": "2.11.0"
@@ -95,7 +92,7 @@
         "version": "3.1.2"
     },
     "friendsofphp/php-cs-fixer": {
-        "version": "3.4",
+        "version": "3.5",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
@@ -325,7 +322,7 @@
         "version": "v6.0.2"
     },
     "symfony/flex": {
-        "version": "2.0",
+        "version": "2.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
@@ -345,7 +342,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "5.4",
-            "ref": "d4131812e20853626928e73d3effef44014944c0"
+            "ref": "3cd216a4d007b78d8554d44a5b1c0a446dab24fb"
         },
         "files": [
             "./config/packages/cache.yaml",
@@ -357,6 +354,15 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/google-mailer": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "f8fd4ddb9b477510f8f4bce2b9c054ab428c0120"
+        }
     },
     "symfony/http-client": {
         "version": "v6.0.2"
@@ -619,6 +625,9 @@
     },
     "symfony/yaml": {
         "version": "v6.0.2"
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.7.0"
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
