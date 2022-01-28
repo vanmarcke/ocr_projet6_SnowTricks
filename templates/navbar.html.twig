@@ -68,4 +68,11 @@
 			</div>
 		</nav>
 	</div>
-</div></header><!-- End Header -->
+</div>
+{% for type, messages in app.flashes %}
+	<div class="alert alert-{{ type }} d-table mx-auto rounded-pill text-center">
+		{% for msg in messages %}
+			{{ msg|raw }}
+		{% endfor %}
+	</div>
+{% endfor %}</header><!-- End Header -->

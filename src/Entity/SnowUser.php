@@ -8,10 +8,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
- */
 #[ORM\Entity(repositoryClass: SnowUserRepository::class)]
+#[UniqueEntity(fields: "username", message: "Ce pseudo est déjà utilisé !")]
+#[UniqueEntity(fields: "email", message: "Cet email est déjà utilisé !")]
 class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
