@@ -33,9 +33,7 @@ class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
     public function getId(): ?int
