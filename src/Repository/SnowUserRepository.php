@@ -28,7 +28,7 @@ class SnowUserRepository extends ServiceEntityRepository implements PasswordUpgr
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
         if (!$user instanceof SnowUser) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
+            throw new UnsupportedUserException(sprintf('Les instances de "%s" ne sont pas prises en charge.', \get_class($user)));
         }
 
         $user->setPassword($newHashedPassword);

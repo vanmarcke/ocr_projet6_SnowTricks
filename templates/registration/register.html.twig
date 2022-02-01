@@ -1,21 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription
+{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
 
-    <h1>Register</h1>
+	<!-- ======= Hero Section form ======= -->
+	<section id="heroform" style="
+			background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
+			url('img/hero-bg.jpg') top center;">
+		<div class="heroform-container" data-aos="fade-up">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+			<div class="section-title">
+				<h1>Inscrivez vous !</h1>
+			</div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+			<h2>
+				<a href="{{ path('app_login') }}">
+					<button class="btn btn-primary">Déjà inscrit ? Connectez-vous !</button>
+				</a>
+			</h2>
+
+			<div class="col-lg-4 text-white font-weight-bold">
+
+				{{ form_start(registrationForm) }}
+
+				{{ form_row(registrationForm.username, {'label': 'Pseudo','attr': {'placeholder': 'Votre Pseudo ...'}}
+				) }}
+				{{ form_row(registrationForm.email, {'label': 'Adresse email','attr': {'placeholder': 'Votre Adresse email ...'}}
+				) }}
+				{{ form_row(registrationForm.plainPassword, {'label': 'Mot de passe !','attr': {'placeholder': 'Votre Mot de passe'}}
+				) }}
+				{{ form_row(registrationForm.agreeTerms, {'label': 'Accepter les conditions d\'utilisation'} ) }}
+
+				<div class="blockcenter">
+					<button type="submit" class="btn btn-primary">Valider</button>
+
+					{{ form_end(registrationForm) }}
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Hero -->{% endblock %}

@@ -7,26 +7,22 @@
 
 	<!-- ======= Hero Section form ======= -->
 	<section id="heroform" style="
-  background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)), 
-  url('img/hero-bg.jpg') top center;">
-    <div class="heroform-container" data-aos="fade-up">
+			background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
+			url('img/hero-bg.jpg') top center;">
+		<div class="heroform-container" data-aos="fade-up">
 
 			<div class="section-title">
 				<h1>Connectez vous !</h1>
 			</div>
-
+			<h2>
+				<a href="{{ path('app_register')}} ">
+					<button class="btn btn-primary">Pas encore de compte ? Inscrivez-vous !</button>
+				</a>
+			</h2>
 			<div class="col-lg-4 text-white font-weight-bold">
 				<form method="post">
 					{% if error %}
 						<div class="alert alert-danger mx-auto">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-					{% endif %}
-
-					{% if app.user %}
-						<div class="mb-3">
-							Vous êtes connecté en tant que
-							{{ app.user.username }}.
-							<a href="{{ path('app_logout') }}">Déconnectez vous</a>
-						</div>
 					{% endif %}
 
 					<label for="inputName">Pseudo</label>
@@ -35,20 +31,14 @@
 					<input type="password" name="password" id="inputPassword" class="form-control" required>
 
 					<div class="blockcenter">
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"><br>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"><br>
 
-					<button class="btn btn btn-primary" type="submit">Valider</button>
-				</form><br>
+						<button class="btn btn btn-primary" type="submit">Valider</button>
+					</form><br>
 
-				<a href="#">
-					<h7 class="text-white">Mot de passe oublié ?</h7>
-				</a><br>
-
-				<h2>
 					<a href="#">
-						<button class="btn btn-primary">Pas encore de compte ? Inscrivez-vous</button>
+						<h7 class="text-white">Mot de passe oublié ?</h7>
 					</a>
-				</h2>
 				</div>
 			</div>
 		</div>
