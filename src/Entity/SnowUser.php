@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SnowUserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -35,6 +37,18 @@ class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'snowUser', targetEntity: SnowFigure::class, orphanRemoval: true)]
+    private $figure;
+
+    #[ORM\OneToMany(mappedBy: 'snowUser', targetEntity: SnowComment::class, orphanRemoval: true)]
+    private $comment;
+
+    public function __construct()
+    {
+        $this->figure = new ArrayCollection();
+        $this->comment = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -138,6 +152,66 @@ class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SnowFigure[]
+     */
+    public function getFigure(): Collection
+    {
+        return $this->figure;
+    }
+
+    public function addFigure(SnowFigure $figure): self
+    {
+        if (!$this->figure->contains($figure)) {
+            $this->figure[] = $figure;
+            $figure->setSnowUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFigure(SnowFigure $figure): self
+    {
+        if ($this->figure->removeElement($figure)) {
+            // set the owning side to null (unless already changed)
+            if ($figure->getSnowUser() === $this) {
+                $figure->setSnowUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SnowComment[]
+     */
+    public function getComment(): Collection
+    {
+        return $this->comment;
+    }
+
+    public function addComment(SnowComment $comment): self
+    {
+        if (!$this->comment->contains($comment)) {
+            $this->comment[] = $comment;
+            $comment->setSnowUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(SnowComment $comment): self
+    {
+        if ($this->comment->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getSnowUser() === $this) {
+                $comment->setSnowUser(null);
+            }
+        }
 
         return $this;
     }
