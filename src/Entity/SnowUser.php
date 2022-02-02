@@ -44,6 +44,9 @@ class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'snowUser', targetEntity: SnowComment::class, orphanRemoval: true)]
     private $comment;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avatar;
+
     public function __construct()
     {
         $this->figure = new ArrayCollection();
@@ -212,6 +215,18 @@ class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setSnowUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

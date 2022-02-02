@@ -20,9 +20,11 @@ class SnowComment
     private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'Comment')]
+    #[ORM\JoinColumn(nullable: false)]
     private $snowFigure;
 
     #[ORM\ManyToOne(targetEntity: SnowUser::class, inversedBy: 'comment')]
+    #[ORM\JoinColumn(nullable: false)]
     private $snowUser;
 
     public function getId(): ?int

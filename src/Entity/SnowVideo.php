@@ -20,7 +20,7 @@ class SnowVideo
     private $createdAt;
 
     #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'video')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private $snowFigure;
 
     public function getId(): ?int
