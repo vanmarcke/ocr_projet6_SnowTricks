@@ -6,6 +6,7 @@ use App\Entity\SnowUser;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class UserChecker implements UserCheckerInterface
 {
@@ -16,11 +17,12 @@ class UserChecker implements UserCheckerInterface
      */
     public function checkPreAuth(UserInterface $user)
     {
-        if (!$user instanceof SnowUser || ($user instanceof SnowUser && $user->isVerified())) {
-            return;
-        }
+        
+        // if (!$user instanceof SnowUser || ($user instanceof SnowUser && $user->isVerified())) {
+        //     return;
+        // }
 
-        throw new CustomUserMessageAccountStatusException('Compte non activé. Vérifiez vos mails pour valider votre inscription !');
+        // throw new CustomUserMessageAccountStatusException('Compte non activé. Vérifiez vos mails pour valider votre inscription !');
     }
 
     /**
@@ -30,6 +32,7 @@ class UserChecker implements UserCheckerInterface
      */
     public function checkPostAuth(UserInterface $user)
     {
+        
         return;
     }
 }
