@@ -26,6 +26,7 @@ security:
             user_checker: App\Security\UserChecker
             logout:
                 path: app_logout
+            login_throttling: true
                 # where to redirect after logout
                 # target: app_any_route
 
