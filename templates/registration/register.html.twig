@@ -4,10 +4,6 @@
 {% endblock %}
 
 {% block body %}
-{% for flashError in app.flashes('verify_email_error') %}
-	<div class="alert alert-danger" role="alert">{{ flashError }}</div>
-{% endfor %}
-
 <!-- ======= Hero Section form ======= -->
 <section id="hero">
 	<div class="hero-container" data-aos="fade-up">
