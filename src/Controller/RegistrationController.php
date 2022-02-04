@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\SnowUser;
 use App\Form\RegistrationFormType;
+use App\Repository\SnowUserRepository;
 use App\Security\EmailVerifier;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -30,9 +32,10 @@ class RegistrationController extends AbstractController
     {
         if ($this->getUser()) {
             $this->addFlash('danger', 'Vous êtes déjà inscrit et connecté.');
+
             return $this->redirectToRoute('home');
         }
-        
+
         $user = new SnowUser();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -64,7 +67,8 @@ class RegistrationController extends AbstractController
             // do anything else you need here, like send an email
 
             $this->addFlash('success', 'Vérifier votre boite mail afin de valider votre inscription.');
-            return $this->redirectToRoute('app_login');
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -73,22 +77,27 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request): Response
+    public function verifyUserEmail(Request $request, VerifyEmailHelperInterface $verifyEmailHelper, SnowUserRepository $snowUserRepository, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        // validate email confirmation link, sets User::isVerified=true and persists
+        $user = $snowUserRepository->find($request->query->get('id'));
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
         try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
+            $verifyEmailHelper->validateEmailConfirmation(
+                $request->getUri(),
+                $user->getId(),
+                $user->getEmail(),
+            );
+        } catch (VerifyEmailExceptionInterface $e) {
+            $this->addFlash('danger', 'Le lien pour vérifier votre email n\'est pas valide. Veuillez demander un nouveau lien');
 
             return $this->redirectToRoute('app_register');
         }
+        $user->setIsVerified(true);
+        $entityManager->flush();
+        $this->addFlash('success', 'Compte vérifié ! Vous pouvez maintenant vous connecter.');
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Votre adresse e-mail a été vérifiée.');
-        
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_login');
     }
 }
