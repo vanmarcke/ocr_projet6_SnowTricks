@@ -30,13 +30,13 @@ class SnowFigure
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowImage::class, orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowImage::class, orphanRemoval: true)]
     private $image;
 
-    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowVideo::class, orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowVideo::class, orphanRemoval: true)]
     private $video;
 
-    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowComment::class, orphanRemoval:true)]
+    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowComment::class, orphanRemoval: true)]
     private $Comment;
 
     #[ORM\ManyToOne(targetEntity: SnowCategory::class, inversedBy: 'figure')]
