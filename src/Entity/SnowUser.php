@@ -11,8 +11,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: SnowUserRepository::class)]
-#[UniqueEntity(fields: "username", message: "Ce pseudo est déjà utilisé !")]
-#[UniqueEntity(fields: "email", message: "Cet email est déjà utilisé !")]
+#[UniqueEntity(fields: 'username', message: 'Ce pseudo est déjà utilisé !')]
+#[UniqueEntity(fields: 'email', message: 'Cet email est déjà utilisé !')]
 class SnowUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
