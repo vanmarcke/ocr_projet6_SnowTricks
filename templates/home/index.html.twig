@@ -17,146 +17,25 @@
 	</section>
 	<!-- End Hero -->
 
-	<main
+	<main 
 		id="main">
 
 		<!-- ======= Figures Section ======= -->
-		<section id="portfolio" class="portfolio">
+		<section id="portfolio" class="portfolio ">
 			<div class="container">
-
 				<div class="section-title" data-aos="fade-in" data-aos-delay="100">
 					<h2>Les Figures</h2>
 				</div>
-
-				<div class="row portfolio-container" data-aos="fade-up">
-
-					<div class="col-lg-3 col-md-6 portfolio-item">
-						<div class="section-namefig text-center">
-							<h2>Nom1</h2>
-						</div>
-						<div class="portfolio-wrap">
-							<img src="img/indy.jpg" class="img-fluid" alt="">
-							<div class="portfolio-links">
-								<a href="img/indy.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom1">
-									<i class="bx bx-plus"></i>
-								</a>
-								<a href="#" title="Voir Plus">
-									<i class="bx bx-link"></i>
-								</a>
-								{% if is_granted('ROLE_USER') %}
-								<a href="#" title="Editer">
-									<i style="color: green;" class="bx bx-edit"></i>
-								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
-									<i style="color: red;" class="bx bx-trash"></i>
-								</a>
-								{% endif %}
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-6 portfolio-item">
-						<div class="section-namefig text-center">
-							<h2>Nom2</h2>
-						</div>
-						<div class="portfolio-wrap">
-							<img src="img/japan.jpg" class="img-fluid" alt="">
-							<div class="portfolio-links">
-								<a href="img/japan.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom2">
-									<i class="bx bx-plus"></i>
-								</a>
-								<a href="#" title="Voir Plus">
-									<i class="bx bx-link"></i>
-								</a>
-								<a href="#" title="Editer">
-									<i style="color: green;" class="bx bx-edit"></i>
-								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
-									<i style="color: red;" class="bx bx-trash"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-6 portfolio-item">
-						<div class="section-namefig text-center">
-							<h2>Nom3</h2>
-						</div>
-						<div class="portfolio-wrap">
-							<img src="img/nosegrab.jpg" class="img-fluid" alt="">
-							<div class="portfolio-links">
-								<a href="img/nosegrab.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom3">
-									<i class="bx bx-plus"></i>
-								</a>
-								<a href="#" title="Voir Plus">
-									<i class="bx bx-link"></i>
-								</a>
-								<a href="#" title="Editer">
-									<i style="color: green;" class="bx bx-edit"></i>
-								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
-									<i style="color: red;" class="bx bx-trash"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-6 portfolio-item">
-						<div class="section-namefig text-center">
-							<h2>Nom4</h2>
-						</div>
-						<div class="portfolio-wrap">
-							<img src="img/sad.jpg" class="img-fluid" alt="">
-							<div class="portfolio-links">
-								<a href="img/sad.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom4">
-									<i class="bx bx-plus"></i>
-								</a>
-								<a href="#" title="Voir Plus">
-									<i class="bx bx-link"></i>
-								</a>
-								<a href="#" title="Editer">
-									<i style="color: green;" class="bx bx-edit"></i>
-								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
-									<i style="color: red;" class="bx bx-trash"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-6 portfolio-item">
-						<div class="section-namefig text-center">
-							<h2>Nom5</h2>
-						</div>
-						<div class="portfolio-wrap">
-							<img src="img/tailgrab.jpg" class="img-fluid" alt="">
-							<div class="portfolio-links">
-								<a href="img/tailgrab.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Nom5">
-									<i class="bx bx-plus"></i>
-								</a>
-								<a href="#" title="Voir Plus">
-									<i class="bx bx-link"></i>
-								</a>
-								<a href="#" title="Editer">
-									<i style="color: green;" class="bx bx-edit"></i>
-								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
-									<i style="color: red;" class="bx bx-trash"></i>
-								</a>
-							</div>
-						</div>
-					</div>
+				<div class="row" data-aos="fade-up">
+					{% include ('home/_blockFigures.html.twig') %}
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-12 contact section-bg mx-auto">
-					<form action="" method="post" role="form" class="php-email-form">
-						<div class="text-center">
-							<button type="submit">Voir plus</button>
-						</div>
-					</form>
-				</div>
-			</div>
+
+			{# BLOC de Figures : Voir plus #}
+			<p class="load-more">Voir Plus</p>
+			<input type="hidden" id="numFigure" value="0">
+			<input type="hidden" id="all" value=" {{ nbFigures }}">
+
 		</section>
 		<!-- End figures Section -->
 
@@ -164,5 +43,41 @@
 
 	</main>
 	<!-- End #main -->
+{% endblock %}
 
+
+{% block textJS %}
+{# Voir plus #}
+<script type="text/javascript">
+    $('.buttonUp').hide();
+    $(document).ready(function(){
+        $('.load-more').click(function(){
+            var numFigure = Number($('#numFigure').val());
+            var allcount = Number($('#all').val());
+            var figurePerPage = 5;
+            numFigure = numFigure + figurePerPage;
+
+            if(numFigure <= allcount){
+                $("#numFigure").val(numFigure);
+
+                $.ajax({
+                    url: '{{ path('blockFigures') }}',
+                    type : 'GET',
+                    data : 'numFigure=' + numFigure,
+                    success: function(response){
+                        $('.col-lg-3').last().after(response);
+                    }    
+                });
+            }
+
+            if (numFigure >= (allcount - figurePerPage)){
+            $('.load-more').hide();  
+            }
+
+            if (numFigure >= 10 ){
+            $('.buttonUp').show();  
+            }            
+        })
+    });
+</script>
 {% endblock %}
