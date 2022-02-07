@@ -295,7 +295,7 @@ class DemoFixtures extends Fixture
                 'src' => '/img/demo/backside2.jpg', ],
 
             ['slug' => 'Rotation Frontside',
-                'src' => '/img/demo/rotationfront.jfif', ],
+                'src' => '/img/demo/rotationfront.png', ],
 
             ['slug' => 'Rodeoback',
                 'src' => '/img/demo/Rodeoback.jpg', ],
