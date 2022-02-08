@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\SnowFigureRepository;
 use App\Manager\SnowFigureManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,10 +28,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/blockFigures', name: 'blockFigures', methods: 'GET')]
-    public function blockFigures(SnowFigureRepository $snowFigureRepository): Response
+    public function blockFigures(Request $request, SnowFigureManager $snowFigureManager): Response
     {
-        $numFigure = $_GET['numFigure'];
-        $figures = $snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC'], 5, $numFigure);
+        $numFigure = $request->query->get('numFigure');
+        $figures = $snowFigureManager->getPublishedNumFigure(5, $numFigure);
 
         return $this->render('home/_blockFigures.html.twig', [
             'figures' => $figures,
