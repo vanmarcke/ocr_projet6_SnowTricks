@@ -1,0 +1,34 @@
+{% for figure in figures %}
+	<div class="col-lg-3 col-md-6 portfolio-item">
+		<div class="section-namefig text-center">
+			<h2>{{ figure.name }}</h2>
+		</div>
+		<div class="portfolio-wrap">
+			{% if figure.image is empty %}
+				<img src="img\default.png" class="img-fluid" alt="image par defaut">
+			{% else %}
+				{% for image in figure.image %}
+					{% if loop.first %}
+						<img src="{{ image.src }}" class="img-fluid" alt="">
+						<div class="portfolio-links">
+							{# <a href="{{ image.src }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ figure.name }}">
+								<i class="bx bx-plus"></i>
+							</a> #}
+							<a href="#" title="Détails de la figure">
+								<i class="bx bx-link"></i>
+							</a>
+							{% if is_granted('ROLE_USER') %}
+								<a href="#" title="Editer">
+									<i style="color: green;" class="bx bx-edit"></i>
+								</a>
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+									<i style="color: red;" class="bx bx-trash"></i>
+								</a>
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}
