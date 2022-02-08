@@ -455,7 +455,6 @@ section {
   font-weight: bold;
   position: relative;
   margin-bottom: 30px;
-  color: #2f4d5a;
   z-index: 2;
 }
 
@@ -463,11 +462,10 @@ section {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  color: #2f4d5a;
 
 }
 
-.section-title h2::after {
+/* .section-title h2::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -477,7 +475,7 @@ section {
   height: 66px;
   background: url(../img/section-title-bg.png) no-repeat;
   z-index: -1;
-}
+} */
 
 .section-title p {
   margin-bottom: 0;
@@ -864,7 +862,7 @@ section {
   text-align: center;
   background: rgba(103, 176, 209, 0.75);
   transition: 0.3s;
-  width: 50%;
+  width: 100%;
 }
 
 .portfolio .portfolio-wrap .portfolio-links a:hover {
