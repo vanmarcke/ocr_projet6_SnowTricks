@@ -47,6 +47,9 @@ class SnowFigure
     #[ORM\JoinColumn(nullable: false)]
     private $snowUser;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $editAt;
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
@@ -229,6 +232,18 @@ class SnowFigure
     public function setSnowUser(?SnowUser $snowUser): self
     {
         $this->snowUser = $snowUser;
+
+        return $this;
+    }
+
+    public function getEditAt(): ?\DateTimeInterface
+    {
+        return $this->editAt;
+    }
+
+    public function setEditAt(?\DateTimeInterface $editAt): self
+    {
+        $this->editAt = $editAt;
 
         return $this;
     }
