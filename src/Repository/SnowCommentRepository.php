@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\SnowComment;
+use App\Entity\SnowFigure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -14,9 +16,31 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SnowCommentRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 5;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SnowComment::class);
+    }
+
+    /**
+     * Method getCommentPaginator.
+     *
+     * @param SnowFigure $snowFigure Snowfigure Entity Reference
+     * @param int        $offset     Get offset value
+     */
+    public function getCommentPaginator(SnowFigure $snowFigure, int $offset): Paginator
+    {
+        $query = $this->createQueryBuilder('s')
+            ->andWhere('s.snowFigure = :snowFigure')
+            ->setParameter('snowFigure', $snowFigure)
+            ->orderBy('s.createdAt', 'DESC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return new Paginator($query);
     }
 
     // /**
