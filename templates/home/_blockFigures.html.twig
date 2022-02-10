@@ -11,10 +11,7 @@
 					{% if loop.first %}
 						<img src="{{ image.src }}" class="img-fluid" alt="">
 						<div class="portfolio-links">
-							{# <a href="{{ image.src }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ figure.name }}">
-								<i class="bx bx-plus"></i>
-							</a> #}
-							<a href="#" title="Détails de la figure">
+							<a href="{{ path('figure_show', {'slug': figure.slug}) }}" title="Détails de la figure">
 								<i class="bx bx-link"></i>
 							</a>
 							{% if is_granted('ROLE_USER') %}
