@@ -24,8 +24,6 @@ class FigureController extends AbstractController
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $snowCommentRepository->getCommentPaginator($snowFigure, $offset);
 
-        dump($snowFigure);
-
         return $this->render('figure/index.html.twig', [
             'controller_name' => 'FigureController',
             'figure' => $snowFigure,
