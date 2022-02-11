@@ -2,15 +2,22 @@
 
 namespace App\Manager;
 
+use App\Entity\SnowComment;
 use App\Entity\SnowFigure;
+use App\Entity\SnowUser;
 use App\Repository\SnowCommentRepository;
 use App\Repository\SnowFigureRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
-class FigureManager
+class FigureManager implements FigureManagerInterface
 {
-    public function __construct(private SnowFigureRepository $snowFigureRepository, private SnowCommentRepository $snowCommentRepository)
+    public function __construct(private SnowFigureRepository $snowFigureRepository, private SnowCommentRepository $snowCommentRepository, private EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
+        $this->entityManager = $entityManager;
+        $this->slugger = $slugger;
     }
 
     /**
@@ -59,5 +66,27 @@ class FigureManager
         $paginator = $this->snowCommentRepository->getCommentPaginator($snowFigure, $offset);
 
         return $paginator;
+    }
+
+    /**
+     * Add a new comment.
+     *
+     * @throws Exception
+     */
+    /**
+     * Method newComment.
+     *
+     * @param SnowComment $comment contains the content of the comment 
+     * @param SnowFigure  $figure  contains the information of the figure 
+     * @param SnowUser    $user    contains user information 
+     */
+    public function newComment(SnowComment $comment, SnowFigure $figure, SnowUser $user): void
+    {
+        $comment->setSnowFigure($figure);
+        $comment->setSnowUser($user);
+        $comment->setCreatedAt(new DateTime()); 
+
+        $this->entityManager->persist($comment) .
+        $this->entityManager->flush();
     }
 }
