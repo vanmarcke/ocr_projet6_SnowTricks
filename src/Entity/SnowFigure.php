@@ -48,7 +48,7 @@ class SnowFigure
     private $snowUser;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
-    private $editAt;
+    private $editedAt;
 
     public function __construct()
     {
@@ -236,14 +236,14 @@ class SnowFigure
         return $this;
     }
 
-    public function getEditAt(): ?\DateTimeInterface
+    public function getEditedAt(): ?\DateTimeInterface
     {
-        return $this->editAt;
+        return $this->editedAt;
     }
 
-    public function setEditAt(?\DateTimeInterface $editAt): self
+    public function setEditedAt(?\DateTimeInterface $editedAt): self
     {
-        $this->editAt = $editAt;
+        $this->editedAt = $editedAt;
 
         return $this;
     }
