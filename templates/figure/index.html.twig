@@ -1,20 +1,256 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FigureController!{% endblock %}
+{% block title %}SnowTricks /{{ figure.name }}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<!-- ======= Hero Section ======= -->
+	{% for image in figure.image %}
+		{% if loop.first %}
+			<section id="herofigure" style="background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
+							url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
+			{% endif %}
+		{% endfor %}
+		<div class="herofigure-container" data-aos="fade-up">
+			<h1>{{ figure.name }}
+			</h1>
+			<a href="#description" class="btn-get-started scrollto">
+				<i class="bx bx-chevrons-down"></i>
+			</a>
+		</div>
+	</section>
+	<!-- End Hero -->
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/frede/OneDrive/Bureau/Snow-Tricks/src/Controller/FigureController.php'|file_link(0) }}">src/Controller/FigureController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/frede/OneDrive/Bureau/Snow-Tricks/templates/figure/index.html.twig'|file_link(0) }}">templates/figure/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<main
+		id="main">
+
+		<!-- ======= Breadcrumbs Section ======= -->
+		<section id="description" class="breadcrumbs">
+			<div class="container">
+
+				<div class="d-flex justify-content-between align-items-center">
+					<h2>{{ figure.name }}</h2>
+					{% if is_granted('ROLE_USER') %}
+						<div>
+							<a href="#" title="Editer">
+								<i class="iconify" data-icon="bx:bx-edit" style="color: green;" data-width="25"></i>
+							</a>
+							<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+								<i class="iconify" data-icon="bx:bx-trash" style="color: red;" data-width="25"></i>
+							</a>
+						</div>
+					{% endif %}
+					<ol>
+						<li>
+							<a href="{{ path('home') }}">Home</a>
+						</li>
+						<li>
+							<a href="#">Figures</a>
+						</li>
+						<li>Détails de la figure :
+							{{ figure.name }}</li>
+					</ol>
+				</div>
+			</div>
+		</section>
+		<!-- Breadcrumbs Section -->
+
+		<!-- Modal -->
+		{% include ('figure/_delete_form.html.twig') %}
+
+		<!-- ======= Figure Details Section ======= -->
+		<section id="portfolio-details" class="portfolio-details">
+			<div class="container">
+				<div class="row gy-4">
+					<div class="text-center my-1">
+						<button class="btn btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseIndicators" aria-expanded="false">
+							Voir les images
+						</button>
+					</div>
+
+					<div class="col-lg-8 collapse dont-collapse-sm" id="collapseIndicators">
+						{% if figure.image is empty and figure.video is empty %}
+							<img src="\img\default.png" class="img-fluid" alt="image par défaut">
+						{% else %}
+							<div id="carouselTrick" class="carousel" data-ride="carousel">
+								<div class="carousel-inner d-flex align-items-center">
+									{% for image in figure.image %}
+										<div class="carousel-item{% if loop.first %} active {% endif %}">
+											<img class="d-block mx-auto img-responsive" src="{{ image.src }}" alt="">
+										</div>
+									{% endfor %}
+									{% for video in figure.video %}
+										<div class="carousel-item{% if figure.image is empty and loop.first %} active {% endif %}">
+											<div class="embed-responsive embed-responsive-16by9">
+												<iframe class="embed-responsive-item" src="{{ video.url }}" allowfullscreen></iframe>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+
+								<div class="carousel-indicators d-block mx-auto">
+									<div class="collapse dont-collapse-sm" id="collapseIndicators">
+										<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+											{% set i = 0 %}
+											<div class="scrolling-wrapper row flex-row flex-nowrap mt-2 pb-2">
+												{% for image in figure.image %}
+													<div class="col-2" data-target="#carouselTrick" data-slide-to="{{ i }}">
+														<img src="{{ image.src }}" class="img-fluid" alt="">
+													</div>
+													{% set i = i + 1 %}
+												{% endfor %}
+												{% set v = i %}
+												{% for video in figure.video %}
+													{% set urlParts = ( video.url |split('embed/',2)) %}
+													{% set urlId = urlParts[1] %}
+													<div class="col-2" data-target="#carouselTrick" data-slide-to="{{ v }}">
+														<img
+														src="http://i3.ytimg.com/vi/{{ urlId }}/hqdefault.jpg" class="img-fluid" alt="">
+													{#  afficher une miniature pour chaque vidéo #}
+													</div>
+													{% set v = v + 1 %}
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+
+								{% if v > 1 %}
+									<a class="carousel-control-prev" href="#carouselTrick" role="button" data-slide="prev">
+										<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="carousel-control-next" href="#carouselTrick" role="button" data-slide="next">
+										<span class="carousel-control-next-icon" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+								{% endif %}
+							</div>
+						{% endif %}
+
+					</div>
+
+					<div class="col-lg-4">
+						<div class="portfolio-info">
+							<h3>Informations sur la figure</h3>
+							<ul>
+								<li>
+									<strong>Catégorie
+									</strong>:
+									{{ figure.snowcategory.name }}</li>
+								<li>
+									<strong>Ecrite par
+									</strong>:
+									{{ figure.snowuser.username }}</li>
+								<li>
+									<strong>Créée le
+									</strong>:
+									{{ figure.createdAt|date('d-m-Y') }}</li>
+								{% if figure.editedAt %}
+									<li>
+										<strong>Modifiée le
+										</strong>
+										:
+										{{ figure.editedAt ? figure.editedAt|date('d-m-Y') : '' }}</li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="portfolio-description">
+							<h2>Description</h2>
+							<p>{{ figure.description }}
+							</p>
+						</div>
+					</div>
+
+					<div class="pt-5">
+						{% if comments|length > 0 %}
+							<h3 class="mb-5">Commentaire(s)</h3>
+							<ul class="comment-list">
+								{% for comment in comments %}
+									<li class="comment">
+										<div class="vcard bio">
+											<img src="{{ comment.snowuser.avatar }}" alt="Free Website Template by Free-Template.co">
+										</div>
+										<div class="comment-body">
+											<h3>{{ comment.snowuser.username }}
+											</h3>
+											<div class="meta">Posté le
+												{{ comment.createdAt ? comment.createdAt|date('d/m/Y') : '' }}</div>
+											<p>{{ comment.content }}
+											</p>
+										</div>
+									</li>
+								{% endfor %}
+
+								{# Pagination comments #}
+								<hr my-1>
+								{% if previous >= 0 %}
+									<a href="{{ path('figure_show', {'slug': figure.slug, offset: previous}) }}">
+										<i class="fas fa-backward shadow-sm p-3 mb-5 bg-white rounded"></i>
+									</a>
+								{% endif %}
+								{% if next < comments|length %}
+									<a href="{{ path('figure_show', {'slug': figure.slug, offset: next }) }}">
+										<i class="fas fa-forward shadow-sm p-3 mb-5 bg-white rounded">
+											Voir plus de comm....</i>
+									</a>
+								{% endif %}
+							{% else %}
+								<div class="text-center text-primary">
+									<h4>Aucun commentaire n'a été posté pour cette figure !
+										<i class="bi bi-emoji-frown"></i>
+									</h4>
+								</div>
+								<div class="text-center text-primary">
+									<h4>Soyez le premier !!!
+										<i class="bi bi-emoji-smile"></i>
+									</h4>
+								</div><br>
+							{% endif %}
+
+						</ul>
+						<!-- END comment-list -->
+
+						<!-- formulaire d'ajout commentaire -->
+						{% if is_granted('ROLE_USER') %}
+
+							<div class="comment-form-wrap pt-5">
+								<h3 class="mb-5">Laisser un commentaire :</h3>
+								<form action="#" class="">
+									<div class="form-group">
+										<label for="message">Votre commentaire</label>
+										<textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+									</div>
+									<div class="form-group">
+										<input type="submit" value="Envoyer" class="btn btn-primary btn-md text-white">
+									</div>
+								</form>
+							</div>
+						{% else %}
+							<div class="text-center">
+								<a href="{{ path('app_login') }}">
+									<button class="btn-primary">Laisser un commentaire ? Connectez-vous !</button>
+								</a>
+							</div>
+						{% endif %}
+						<br><br>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Figure Details Section -->
+
+	</main>
+	<!-- End #main -->
+
+{% endblock %}
+
+{% block textJS %}
+	<script>
+		$('.carousel').carousel({interval: 240000})
+	</script>
 {% endblock %}
