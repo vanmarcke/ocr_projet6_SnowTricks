@@ -222,9 +222,7 @@
 								<h3 class="mb-5">Laisser un commentaire :</h3>
 
 								{{ form_start(commentForm) }}
-								{{ form_row(commentForm.content, {
-										label: 'Votre commentaire :', value: ''}) 
-									}}
+								{{ form_row(commentForm.content) }}
 								<button type="submit" class="btn-primary">Envoyer</button>
 								{{ form_end(commentForm) }}
 
