@@ -2,11 +2,14 @@
 
 namespace App\Manager;
 
+use App\Entity\SnowFigure;
+use App\Repository\SnowCommentRepository;
 use App\Repository\SnowFigureRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class SnowFigureManager
+class FigureManager
 {
-    public function __construct(private SnowFigureRepository $snowFigureRepository)
+    public function __construct(private SnowFigureRepository $snowFigureRepository, private SnowCommentRepository $snowCommentRepository)
     {
     }
 
@@ -43,5 +46,18 @@ class SnowFigureManager
         $figures = $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC'], $max, $numFigure);
 
         return $figures;
+    }
+
+    /**
+     * Method getComment.
+     *
+     * @param SnowFigure $snowFigure Return the figure
+     * @param int        $offset     Returns the comment offset count
+     */
+    public function getComment(SnowFigure $snowFigure, int $offset): Paginator
+    {
+        $paginator = $this->snowCommentRepository->getCommentPaginator($snowFigure, $offset);
+
+        return $paginator;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Manager\SnowFigureManager;
+use App\Manager\FigureManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,11 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(SnowFigureManager $snowFigureManager): Response
+    public function index(FigureManager $figureManager): Response
     {
         //list of published figures, by decreasing id
-        $figuresPublished = $snowFigureManager->getPublishedFigures();
-        $figuresPublishedHome = $snowFigureManager->getPublishedFiguresLimit(5);
+        $figuresPublished = $figureManager->getPublishedFigures();
+        $figuresPublishedHome = $figureManager->getPublishedFiguresLimit(5);
 
         //total number of figures published
         $nbFiguresPublished = count($figuresPublished);
@@ -27,11 +27,11 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/blockFigures', name: 'blockFigures', methods: 'GET')]
-    public function blockFigures(Request $request, SnowFigureManager $snowFigureManager): Response
+    #[Route('/blockFigures', name: 'blockFigures')]
+    public function blockFigures(Request $request, FigureManager $figureManager): Response
     {
         $numFigure = $request->query->get('numFigure');
-        $figures = $snowFigureManager->getPublishedNumFigure(5, $numFigure);
+        $figures = $figureManager->getPublishedNumFigure(5, $numFigure);
 
         return $this->render('home/_blockFigures.html.twig', [
             'figures' => $figures,

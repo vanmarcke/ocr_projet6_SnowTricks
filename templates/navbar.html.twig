@@ -3,7 +3,7 @@
 	<div class="container d-flex align-items-center justify-content-between">
 
 		<div class="logo">
-			<a href="{{ path('home')}} "><img src="img/logo.png" alt="" class="img-fluid"></a>
+			<a href="{{ path('home')}} "><img src="/img/logo.png" alt="" class="img-fluid"></a>
 		</div>
 
 		<div
@@ -15,7 +15,7 @@
 						<a class="nav-link scrollto" href="{{ path('home') }}">Accueil</a>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="#">Tricks</a>
+						<a class="nav-link scrollto" href="#">Figures</a>
 					</li>
 					<li>
 						{% if is_granted('ROLE_USER') %}

@@ -482,6 +482,49 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Section carousel figure
+--------------------------------------------------------------*/
+.carousel-inner{
+  height: 700px;
+}
+
+.carousel-inner img {
+  max-height: 700px;
+  width : auto;
+  max-width: 1100px;
+}
+
+.carousel-control-prev-icon{
+  background-color: #54b4eb;
+}
+
+.carousel-control-next-icon{
+  background-color: #54b4eb;
+}   
+
+.carousel-indicators{
+  position :relative;
+  width: auto;
+}
+
+.scrolling-wrapper{
+  overflow-x: auto;
+}
+
+@media (min-width: 992px)
+{
+  .collapse.dont-collapse-sm{
+      display : block;
+      visibility: visible;
+  }
+}
+
+.scrolling-wrapper .col-2
+{
+  max-width: none !important;
+}
+
+/*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
 .breadcrumbs {
@@ -917,7 +960,13 @@ section {
 .portfolio-details .portfolio-info {
   padding: 30px;
   box-shadow: 0px 0 30px rgba(47, 77, 90, 0.08);
-  margin-top: 130px;
+  margin-top: 230px;;
+}
+
+@media (max-width: 992px) {
+  .portfolio-details .portfolio-info {
+    margin-top: 10px;
+  }
 }
 
 .portfolio-details .portfolio-info h3 {
@@ -937,6 +986,11 @@ section {
 .portfolio-details .portfolio-info ul li+li {
   margin-top: 10px;
 }
+
+.portfolio-info li strong{
+  color: #2fa4e7;
+}
+
 
 .portfolio-details .portfolio-description {
   padding-top: 30px;
@@ -1128,7 +1182,7 @@ section {
   }
 }
 
-/*--------------------------------------------------------------
+/*-------------------------------------------------------------- 
 # Contact
 --------------------------------------------------------------*/
 .contact {
