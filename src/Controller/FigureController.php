@@ -7,6 +7,7 @@ use App\Entity\SnowFigure;
 use App\Form\CommentFormType;
 use App\Manager\FigureManagerInterface;
 use App\Repository\SnowCommentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,4 +60,16 @@ class FigureController extends AbstractController
             'next' => min(count($paginator), $offset + SnowCommentRepository::PAGINATOR_PER_PAGE),
         ]);
     }
+
+    #[Route('/figure/delete/{slug}', name: 'figure_delete')]
+     public function delete(SnowFigure $figure, EntityManagerInterface $entityManager): Response
+     {
+         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+         $entityManager->remove($figure);
+         $entityManager->flush();
+         $this->addFlash('success', 'La figure a bien été supprimée');
+
+         return $this->redirectToRoute('home');
+     }
 }
