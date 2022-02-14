@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SnowTricks /{{ figure.name }}
+{% block title %}SnowTricks / {{ figure.name }}
 {% endblock %}
 
 {% block body %}
@@ -9,7 +9,7 @@
 	{% for image in figure.image %}
 		{% if loop.first %}
 			<section id="herofigure" style="background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
-							url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
+											url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
 			{% endif %}
 		{% endfor %}
 		<div class="herofigure-container" data-aos="fade-up">
@@ -179,7 +179,7 @@
 											<h3>{{ comment.snowuser.username }}
 											</h3>
 											<div class="meta">Posté le
-												{{ comment.createdAt ? comment.createdAt|date('d/m/Y') : '' }}</div>
+												{{ comment.createdAt ? comment.createdAt|date('d/m/Y à H:i' ) : '' }}</div>
 											<p>{{ comment.content }}
 											</p>
 										</div>
@@ -220,15 +220,12 @@
 
 							<div class="comment-form-wrap pt-5">
 								<h3 class="mb-5">Laisser un commentaire :</h3>
-								<form action="#" class="">
-									<div class="form-group">
-										<label for="message">Votre commentaire</label>
-										<textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-									</div>
-									<div class="form-group">
-										<input type="submit" value="Envoyer" class="btn btn-primary btn-md text-white">
-									</div>
-								</form>
+
+								{{ form_start(commentForm) }}
+								{{ form_row(commentForm.content) }}
+								<button type="submit" class="btn-primary">Envoyer</button>
+								{{ form_end(commentForm) }}
+
 							</div>
 						{% else %}
 							<div class="text-center">
