@@ -46,5 +46,14 @@ interface FigureManagerInterface
      *
      * @return void
      */
-    public function newComment(SnowComment $comment, SnowFigure $figure, SnowUser $user);
+    public function newComment(SnowComment $comment, SnowFigure $figure, SnowUser $user): void;
+
+    /**
+     * Method removeFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     *
+     * @return void
+     */
+    public function removeFigure(SnowFigure $figure): void;
 }
