@@ -48,7 +48,7 @@ class FigureController extends AbstractController
         }
 
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $figureManager->getComment($figure, $offset); dump($offset);
+        $paginator = $figureManager->getComment($figure, $offset);
 
         return $this->render('figure/index.html.twig', [
             'controller_name' => 'FigureController',
