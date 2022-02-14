@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\SnowComment;
 use App\Entity\SnowFigure;
 use App\Form\CommentFormType;
-use App\Manager\FigureManager;
 use App\Manager\FigureManagerInterface;
 use App\Repository\SnowCommentRepository;
 use Exception;
@@ -17,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FigureController extends AbstractController
 {
     #[Route('/figure/{slug}', name: 'figure_show')]
-    public function index(Request $request, FigureManager $figureManager, FigureManagerInterface $figureManagerInterface, SnowFigure $figure): Response
+    public function index(Request $request, FigureManagerInterface $figureManager, SnowFigure $figure): Response
     {
         // Back to home page if the requested figure is not published
         if (!$figure->getPublish()) {
@@ -33,7 +32,7 @@ class FigureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $user) {
             try {
-                $figureManagerInterface->newComment($comment, $figure, $user);
+                $figureManager->newComment($comment, $figure, $user);
             } catch (Exception) {
                 $this->addFlash('danger', 'Erreur Système : veuillez ré-essayer');
 
@@ -49,7 +48,7 @@ class FigureController extends AbstractController
         }
 
         $offset = max(0, $request->query->getInt('offset', 0));
-        $paginator = $figureManager->getComment($figure, $offset);
+        $paginator = $figureManager->getComment($figure, $offset); dump($offset);
 
         return $this->render('figure/index.html.twig', [
             'controller_name' => 'FigureController',

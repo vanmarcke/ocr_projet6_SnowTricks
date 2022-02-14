@@ -58,8 +58,8 @@ class FigureManager implements FigureManagerInterface
     /**
      * Method getComment.
      *
-     * @param SnowFigure $snowFigure Return the figure
-     * @param int        $offset     Returns the comment offset count
+     * @param SnowFigure $snowFigure Contains the information of the figure
+     * @param int        $offset     Contains the comment offset count
      */
     public function getComment(SnowFigure $snowFigure, int $offset): Paginator
     {
@@ -76,15 +76,18 @@ class FigureManager implements FigureManagerInterface
     /**
      * Method newComment.
      *
-     * @param SnowComment $comment contains the content of the comment 
-     * @param SnowFigure  $figure  contains the information of the figure 
-     * @param SnowUser    $user    contains user information 
+     * @param SnowComment $comment contains the content of the comment
+     * @param SnowFigure  $figure  contains the information of the figure
+     * @param SnowUser    $user    contains user information
      */
     public function newComment(SnowComment $comment, SnowFigure $figure, SnowUser $user): void
     {
-        $comment->setSnowFigure($figure);
-        $comment->setSnowUser($user);
-        $comment->setCreatedAt(new DateTime()); 
+        $comment
+            ->setSnowFigure($figure)
+            ->setSnowUser($user)
+            ->setCreatedAt(
+                new DateTime()
+            );
 
         $this->entityManager->persist($comment) .
         $this->entityManager->flush();
