@@ -69,11 +69,6 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Add a new comment.
-     *
-     * @throws Exception
-     */
-    /**
      * Method newComment.
      *
      * @param SnowComment $comment contains the content of the comment
@@ -90,6 +85,40 @@ class FigureManager implements FigureManagerInterface
             );
 
         $this->entityManager->persist($comment) .
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Method newFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     * @param SnowUser   $user   contains user information
+     */
+    public function newFigure(SnowFigure $figure, SnowUser $user): void
+    {
+        $slug = $this->slugger->slug($figure->getName())->folded();
+        $figure
+            ->setSlug($slug)
+            ->setCreatedAt(new DateTime())
+            ->setSnowUser($user);    
+
+        $this->entityManager->persist($figure);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Method editFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     */
+    public function editFigure(SnowFigure $figure): void
+    {
+        $slug = $this->slugger->slug($figure->getName())->folded();
+        $figure
+            ->setSlug($slug)
+            ->setEditedAt(new DateTime());
+
+        $this->entityManager->persist($figure);
         $this->entityManager->flush();
     }
 

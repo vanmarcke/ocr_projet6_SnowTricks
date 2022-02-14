@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\SnowComment;
 use App\Entity\SnowFigure;
 use App\Form\CommentFormType;
+use App\Form\FigureFormType;
 use App\Manager\FigureManagerInterface;
 use App\Repository\SnowCommentRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +58,46 @@ class FigureController extends AbstractController
             'comments' => $paginator,
             'previous' => $offset - SnowCommentRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + SnowCommentRepository::PAGINATOR_PER_PAGE),
+        ]);
+    }
+
+    #[Route('/new', name: 'figure_new')]
+    #[Route('/figure/edit/{slug}', name: 'figure_edit')]
+    public function new(SnowFigure $figure = null, Request $request, FigureManagerInterface $figureManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if (!$figure) {
+            $figure = new SnowFigure();
+        }
+
+        $user = $this->getUser();
+        $form = $this->createForm(FigureFormType::class, $figure);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                if (!$figure->getId()) {
+                    $figureManager->newFigure($figure, $user);
+                } else {
+                    $figureManager->editFigure($figure);
+                }
+            } catch (Exception $ex) {
+                $this->addFlash('danger', $ex->getMessage() . 'Erreur Système : veuillez ré-essayer');
+
+                return $this->redirectToRoute('home');
+            }
+            $this->addFlash('success', 'L\'opération a bien été effectuée');
+
+            return $this->redirectToRoute('figure_show', [
+                'slug' => $figure->getSlug(),
+            ]);
+        }
+
+        return $this->render('figure/managedFigure.html.twig', [
+            'figureForm' => $form->createView(),
+            'figure' => $figure,
+            'editMode' => null !== $figure->getId(),
         ]);
     }
 
