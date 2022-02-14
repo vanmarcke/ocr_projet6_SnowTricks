@@ -484,43 +484,41 @@ section {
 /*--------------------------------------------------------------
 # Section carousel figure
 --------------------------------------------------------------*/
-.carousel-inner{
+.carousel-inner {
   height: 700px;
 }
 
 .carousel-inner img {
   max-height: 700px;
-  width : auto;
+  width: auto;
   max-width: 1100px;
 }
 
-.carousel-control-prev-icon{
+.carousel-control-prev-icon {
   background-color: #54b4eb;
 }
 
-.carousel-control-next-icon{
+.carousel-control-next-icon {
   background-color: #54b4eb;
-}   
+}
 
-.carousel-indicators{
-  position :relative;
+.carousel-indicators {
+  position: relative;
   width: auto;
 }
 
-.scrolling-wrapper{
+.scrolling-wrapper {
   overflow-x: auto;
 }
 
-@media (min-width: 992px)
-{
-  .collapse.dont-collapse-sm{
-      display : block;
-      visibility: visible;
+@media (min-width: 992px) {
+  .collapse.dont-collapse-sm {
+    display: block;
+    visibility: visible;
   }
 }
 
-.scrolling-wrapper .col-2
-{
+.scrolling-wrapper .col-2 {
   max-width: none !important;
 }
 
@@ -871,7 +869,7 @@ section {
   transition: 0.3s;
   position: relative;
   overflow: hidden;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .portfolio .portfolio-wrap::before {
@@ -883,7 +881,7 @@ section {
   top: 0;
   bottom: 0;
   transition: all ease-in-out 0.3s;
-  z-index: 2;
+  /* z-index: 2; */
   opacity: 0;
 }
 
@@ -892,7 +890,7 @@ section {
   left: 0;
   right: 0;
   bottom: -60px;
-  z-index: 3;
+  /* z-index: 3; */
   position: absolute;
   transition: all ease-in-out 0.3s;
   display: flex;
@@ -960,7 +958,8 @@ section {
 .portfolio-details .portfolio-info {
   padding: 30px;
   box-shadow: 0px 0 30px rgba(47, 77, 90, 0.08);
-  margin-top: 230px;;
+  margin-top: 230px;
+  ;
 }
 
 @media (max-width: 992px) {
@@ -987,7 +986,7 @@ section {
   margin-top: 10px;
 }
 
-.portfolio-info li strong{
+.portfolio-info li strong {
   color: #2fa4e7;
 }
 

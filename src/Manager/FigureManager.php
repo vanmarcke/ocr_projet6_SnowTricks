@@ -92,4 +92,17 @@ class FigureManager implements FigureManagerInterface
         $this->entityManager->persist($comment) .
         $this->entityManager->flush();
     }
+
+    /**
+     * Method removeFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     *
+     * @return void
+     */
+    public function removeFigure(SnowFigure $figure): void
+    {
+        $this->entityManager->remove($figure);
+        $this->entityManager->flush();
+    }
 }

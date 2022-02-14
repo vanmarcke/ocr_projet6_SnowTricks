@@ -18,9 +18,10 @@
 								<a href="#" title="Editer">
 									<i style="color: green;" class="bx bx-edit"></i>
 								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop" title="Supprimer">
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="Supprimer">
 									<i style="color: red;" class="bx bx-trash"></i>
 								</a>
+								{{ include('figure/_delete_form.html.twig') }}
 							{% endif %}
 						{% endif %}
 					{% endfor %}
