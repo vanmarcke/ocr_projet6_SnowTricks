@@ -7,6 +7,7 @@ use App\Entity\SnowFigure;
 use App\Form\CommentFormType;
 use App\Manager\FigureManagerInterface;
 use App\Repository\SnowCommentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
