@@ -4,8 +4,11 @@ namespace App\Entity;
 
 use App\Repository\SnowImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: SnowImageRepository::class)]
+#[ORM\EntityListeners(['App\EntityListener\ImageListener'])]
 class SnowImage
 {
     #[ORM\Id]
@@ -19,9 +22,15 @@ class SnowImage
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'image')]
+    #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
     private $snowFigure;
+
+      /**
+     * @var UploadedFile|null
+     * @Assert\Image
+     */
+    private $file;
 
     public function getId(): ?int
     {
@@ -62,5 +71,21 @@ class SnowImage
         $this->snowFigure = $snowFigure;
 
         return $this;
+    }
+
+    /**
+     * @return UploadedFile|null
+     */
+    public function getFile(): ?UploadedFile
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param UploadedFile|null $file
+     */
+    public function setFile(?UploadedFile $file): void
+    {
+        $this->file = $file;
     }
 }
