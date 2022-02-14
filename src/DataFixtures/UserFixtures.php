@@ -29,6 +29,7 @@ class UserFixtures extends Fixture
         ->setPassword($password)
         ->setRoles([])
         ->setIsVerified('1')
+        ->setAvatar('/img/avatar.jpg')
         ->setCreatedAt(new DateTime());
         $manager->persist($userDemo);
         $manager->flush();

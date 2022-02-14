@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop{{figure.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -16,9 +16,8 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">Annuler</button>
-				<form method="post" action="">
+				<form method="post" action="{{ path('figure_delete', {'slug': figure.slug}) }}">
 					<input type="hidden" name="_method" value="DELETE">
-					<input type="hidden" name="_token" value="#">
 					<button class="btn btn-danger btn buttonCard">Confirmer</button>
 				</form>
 			</div>
