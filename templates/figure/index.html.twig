@@ -1,39 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SnowTricks / {{ figure.name }}
+{% block title %}SnowTricks /{{ figure.name }}
 {% endblock %}
 
 {% block body %}
-
-	<!-- ======= Hero Section ======= -->
-	{% for image in figure.image %}
-		{% if loop.first %}
-			<section id="herofigure" style="background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
-											url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
-			{% endif %}
-		{% endfor %}
-		<div class="herofigure-container" data-aos="fade-up">
-			<h1>{{ figure.name }}
-			</h1>
-			<a href="#description" class="btn-get-started scrollto">
-				<i class="bx bx-chevrons-down"></i>
-			</a>
-		</div>
+	{% if figure.images is empty %}
+		<section id="heronoimage">
+			<div class="heronoimage-container" data-aos="fade-up">
+				<h1>{{ figure.name }}</h1>
+				<a href="#description" class="btn-get-started scrollto">
+					<i class="bx bx-chevrons-down"></i>
+				</a>
+			</div>
+		</section>
+	{% else %}
+		<!-- ======= Hero Section ======= -->
+		{% for image in figure.images %}
+			{% if loop.first %}
+				<section id="herofigure" style="background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
+																													url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
+				{% endif %}
+			{% endfor %}
+			<div class="herofigure-container" data-aos="fade-up">
+				<h1>{{ figure.name }}
+				</h1>
+				<a href="#description" class="btn-get-started scrollto">
+					<i class="bx bx-chevrons-down"></i>
+				</a>
+			</div>
+		{% endif %}
 	</section>
 	<!-- End Hero -->
 
 	<main
 		id="main">
-
 		<!-- ======= Breadcrumbs Section ======= -->
 		<section id="description" class="breadcrumbs">
 			<div class="container">
-
 				<div class="d-flex justify-content-between align-items-center">
 					<h2>{{ figure.name }}</h2>
 					{% if is_granted('ROLE_USER') %}
 						<div>
-							<a href="#" title="Editer">
+							<a href="{{ path('figure_edit', {'slug': figure.slug}) }}" title="Editer">
 								<i class="iconify" data-icon="bx:bx-edit" style="color: green;" data-width="25"></i>
 							</a>
 							<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="Supprimer">
@@ -68,20 +76,21 @@
 							Voir les images
 						</button>
 					</div>
-
 					<div class="col-lg-8 collapse dont-collapse-sm" id="collapseIndicators">
-						{% if figure.image is empty and figure.video is empty %}
-							<img src="\img\default.png" class="img-fluid" alt="image par défaut">
+						{% if figure.images is empty and figure.videos is empty %}
+							<img
+							class="d-block mx-auto img-responsive" src="\img\pas-d-image-disponible.jpg" alt="">
+							{# <img src="\img\pas-d-image-disponible.jpg" class="img-fluid" alt="image par défaut"> #}
 						{% else %}
 							<div id="carouselTrick" class="carousel" data-ride="carousel">
 								<div class="carousel-inner d-flex align-items-center">
-									{% for image in figure.image %}
+									{% for image in figure.images %}
 										<div class="carousel-item{% if loop.first %} active {% endif %}">
 											<img class="d-block mx-auto img-responsive" src="{{ image.src }}" alt="">
 										</div>
 									{% endfor %}
-									{% for video in figure.video %}
-										<div class="carousel-item{% if figure.image is empty and loop.first %} active {% endif %}">
+									{% for video in figure.videos %}
+										<div class="carousel-item{% if figure.images is empty and loop.first %} active {% endif %}">
 											<div class="embed-responsive embed-responsive-16by9">
 												<iframe class="embed-responsive-item" src="{{ video.url }}" allowfullscreen></iframe>
 											</div>
@@ -94,14 +103,14 @@
 										<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
 											{% set i = 0 %}
 											<div class="scrolling-wrapper row flex-row flex-nowrap mt-2 pb-2">
-												{% for image in figure.image %}
+												{% for image in figure.images %}
 													<div class="col-2" data-target="#carouselTrick" data-slide-to="{{ i }}">
 														<img src="{{ image.src }}" class="img-fluid" alt="">
 													</div>
 													{% set i = i + 1 %}
 												{% endfor %}
 												{% set v = i %}
-												{% for video in figure.video %}
+												{% for video in figure.videos %}
 													{% set urlParts = ( video.url |split('embed/',2)) %}
 													{% set urlId = urlParts[1] %}
 													<div class="col-2" data-target="#carouselTrick" data-slide-to="{{ v }}">
@@ -117,7 +126,6 @@
 								</div>
 							</div>
 						{% endif %}
-
 					</div>
 
 					<div class="col-lg-4">
@@ -200,7 +208,6 @@
 									</h4>
 								</div><br>
 							{% endif %}
-
 						</ul>
 						<!-- END comment-list -->
 
@@ -209,12 +216,10 @@
 
 							<div class="comment-form-wrap pt-5">
 								<h3 class="mb-5">Laisser un commentaire :</h3>
-
 								{{ form_start(commentForm) }}
 								{{ form_row(commentForm.content) }}
 								<button type="submit" class="btn-primary">Envoyer</button>
 								{{ form_end(commentForm) }}
-
 							</div>
 						{% else %}
 							<div class="text-center">
@@ -229,10 +234,8 @@
 			</div>
 		</section>
 		<!-- End Figure Details Section -->
-
 	</main>
 	<!-- End #main -->
-
 {% endblock %}
 
 {% block textJS %}

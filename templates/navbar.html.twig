@@ -19,7 +19,7 @@
 					</li>
 					<li>
 						{% if is_granted('ROLE_USER') %}
-							<a class="nav-link scrollto" href="#">Ajouter Trick</a>
+							<a class="nav-link scrollto" href="{{ path('figure_new')}}">Ajouter Figure</a>
 						</li>
 					</li>
 					<li>
@@ -51,7 +51,7 @@
 					<h3 class="far fa-snowboarding"></h3>
 				</a>
 				{% if is_granted('ROLE_USER') %}
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{{ path('figure_new')}}">
 						<h3 class="far fa-plus-square"></h3>
 					</a>
 					<a class="nav-link" href="#">

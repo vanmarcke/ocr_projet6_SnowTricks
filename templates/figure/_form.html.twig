@@ -1,0 +1,132 @@
+{{ form_start(figureForm) }}
+
+{{ form_widget(figureForm._token) }}
+
+{{ form_row(figureForm.name, { label: 'Titre' }) }}
+
+{{ form_row(figureForm.description, { label: 'Description' }) }}
+
+{{ form_row(figureForm.snowCategory, { label: 'Catégorie' }) }}
+
+{{ form_row(figureForm.publish, { label: 'Publié' }) }}
+
+<hr>
+{# PHOTOS  #}
+<div class="d-flex justify-content-start mb-1">
+    <div class="mr-2">
+        {{ form_label(figureForm.images, 'Images') }}
+    </div>
+    <button type="button"
+        class="add-another-collection-widget btn-sm btn-primary mr-2"
+        data-list-selector="#image-list"><i class="fas fa-plus"></i></button>
+    </button>
+    <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false"> {# Sur mobile, un bouton affichera les images pour les suppressions #}
+        Afficher la liste
+    </button> 
+</div>
+         
+<ul class="list-inline" id="image-list"
+    data-prototype="{{ form_widget(figureForm.images.vars.prototype)|e }}"
+    data-widget-tags="{{ '<li class="list-group-item"></li>'|e }}"
+    data-widget-counter="{{ figureForm.images|length }}">
+    <div class="collapse dont-collapse-sm  text-center" id="collapseImage">
+    {% for image in figureForm.images %}    
+        {{ form_errors(image) }}
+        <li class="list-inline-item image-list-miniature"> {# le champ téléchargement est masqué quand il y a une image #}
+            {% if image.vars.data is not null and image.vars.data.src is not null %}
+            <img src="{{ asset(image.vars.data.src) }}" alt="" width="250" height="150">
+            {% endif %}
+            {{ form_widget(image) }}
+            <button type="button" class="collection-item-delete"><i class="iconify" data-icon="bx:bx-trash" style="color: red;" data-width="25"></i></button>
+        </li>
+    {% endfor %}
+    </div>    
+</ul>
+{# PHOTOS  #}
+
+
+<hr>
+{# VIDEOS #}
+<div class="d-flex justify-content-start mb-1">
+    <div class="mr-2">
+        {{ form_label(figureForm.videos, 'Vidéos') }}
+    </div>       
+    <button type="button"
+        class="add-another-collection-widget btn-sm btn-primary mr-2"
+        data-list-selector="#video-list"><i class="fas fa-plus"></i></button>
+    </button>
+    <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseVideo" aria-expanded="false"> {# Sur mobile, un bouton affichera les vidéos pour les suppressions #}
+        Afficher la liste
+    </button>  
+</div>
+    
+<ul class="list-group px-1" id="video-list"
+    data-prototype="{{ form_widget(figureForm.videos.vars.prototype)|e }}"
+    data-widget-tags="{{ '<li class="list-group-item"></li>'|e }}"
+    data-widget-counter="{{ figureForm.videos|length }}">
+    <div class="collapse dont-collapse-sm" id="collapseVideo">
+    {% for video in figureForm.videos %}
+        {{ form_errors(video) }}
+        <li class="list-group-item">
+            {{ form_widget(video) }}
+            <button type="button" class="collection-item-delete"><i class="iconify" data-icon="bx:bx-trash" style="color: red;" data-width="25"></i></button>
+        </li>
+    {% endfor %}
+    </div>
+</ul>
+{# VIDEOS #}    
+
+<hr>
+{# BOUTON SAVE #}  
+<div class="blockcenter">
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+</div>
+{# BOUTON SAVE #}
+
+{{ form_end(figureForm, { "render_rest": false }) }}
+
+
+{% block textJS %}
+{# https://symfony.com/doc/current/reference/forms/types/collection.html #}
+<script>
+$(document).ready(function () {
+    $('.add-another-collection-widget').click(function (e) {
+        var list = $($(this).attr('data-list-selector'));
+        // Try to find the counter of the list or use the length of the list
+        var counter = list.data('widget-counter') || list.children().length;
+
+        // grab the prototype template
+        var newWidget = list.attr('data-prototype');
+        // replace the "__name__" used in the id and name of the prototype
+        // with a number that's unique to your url
+        // end name attribute looks like name="figure[videos][2]"
+        newWidget = newWidget.replace(/__name__/g, counter);
+        // Increase the counter
+        counter++;
+        // And store it, the length cannot be used if deleting widgets is allowed
+        list.data('widget-counter', counter);
+
+        // create a new list element and add it to the list
+        var newElem = $(list.attr('data-widget-tags')).html(newWidget);
+        newElem.appendTo(list);
+
+        // also add a remove button
+        newElem.append('<button type="button" class="collection-item-delete"><i class="iconify" data-icon="bx:bx-trash" style="color: red;" data-width="25"></i></button>');
+        newElem.find('.collection-item-delete').click(function(e) {
+            e.preventDefault();          
+            $(this).parent().remove();
+            return false;
+        });
+        bsCustomFileInput.init();
+    });    
+
+    //remove item button
+    $('.collection-item-delete').click(function(e) {
+        e.preventDefault();          
+        $(this).parent().remove();
+        return false;
+    });
+
+});    
+</script>
+{% endblock %}
