@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\SnowFigureRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: SnowFigureRepository::class)]
+#[UniqueEntity(fields: 'name', message: 'Cette figure est déjà enregistrée !')]
 class SnowFigure
 {
     #[ORM\Id]
@@ -15,7 +18,7 @@ class SnowFigure
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255)]
@@ -30,14 +33,14 @@ class SnowFigure
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowImage::class, orphanRemoval: true)]
-    private $image;
+    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowImage::class, cascade: ['persist'], orphanRemoval: true)]
+    private $images;
 
-    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowVideo::class, orphanRemoval: true)]
-    private $video;
+    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowVideo::class, cascade: ['persist'],  orphanRemoval: true)]
+    private $videos;
 
     #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowComment::class, orphanRemoval: true)]
-    private $Comment;
+    private $Comments;
 
     #[ORM\ManyToOne(targetEntity: SnowCategory::class, inversedBy: 'figure')]
     #[ORM\JoinColumn(nullable: false)]
@@ -52,9 +55,9 @@ class SnowFigure
 
     public function __construct()
     {
-        $this->image = new ArrayCollection();
-        $this->video = new ArrayCollection();
-        $this->Comment = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->videos = new ArrayCollection();
+        $this->Comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,45 +128,49 @@ class SnowFigure
     /**
      * @return Collection|SnowImage[]
      */
-    public function getImage(): Collection
+    public function getImages(): Collection
     {
-        return $this->image;
+        return $this->images;
     }
 
     public function addImage(SnowImage $image): self
     {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setCreatedAt(new DateTime());
             $image->setSnowFigure($this);
         }
 
         return $this;
     }
 
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
     public function removeImage(SnowImage $image): self
     {
-        if ($this->image->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getSnowFigure() === $this) {
-                $image->setSnowFigure(null);
-            }
-        }
-
+        $image->setSnowFigure(null);
+        $this->images->removeElement($image);
         return $this;
     }
 
     /**
      * @return Collection|SnowVideo[]
      */
-    public function getVideo(): Collection
+    public function getVideos(): Collection
     {
-        return $this->video;
+        return $this->videos;
     }
 
     public function addVideo(SnowVideo $video): self
     {
-        if (!$this->video->contains($video)) {
-            $this->video[] = $video;
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setCreatedAt(new DateTime());
             $video->setSnowFigure($this);
         }
 
@@ -172,28 +179,23 @@ class SnowFigure
 
     public function removeVideo(SnowVideo $video): self
     {
-        if ($this->video->removeElement($video)) {
-            // set the owning side to null (unless already changed)
-            if ($video->getSnowFigure() === $this) {
-                $video->setSnowFigure(null);
-            }
-        }
-
+        $video->setSnowFigure(null);
+        $this->videos->removeElement($video);
         return $this;
     }
 
     /**
      * @return Collection|SnowComment[]
      */
-    public function getComment(): Collection
+    public function getComments(): Collection
     {
-        return $this->Comment;
+        return $this->Comments;
     }
 
     public function addComment(SnowComment $comment): self
     {
-        if (!$this->Comment->contains($comment)) {
-            $this->Comment[] = $comment;
+        if (!$this->Comments->contains($comment)) {
+            $this->Comments[] = $comment;
             $comment->setSnowFigure($this);
         }
 
@@ -202,7 +204,7 @@ class SnowFigure
 
     public function removeComment(SnowComment $comment): self
     {
-        if ($this->Comment->removeElement($comment)) {
+        if ($this->Comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
             if ($comment->getSnowFigure() === $this) {
                 $comment->setSnowFigure(null);
