@@ -26,7 +26,7 @@ class SnowImage
     #[ORM\JoinColumn(nullable: false)]
     private $snowFigure;
 
-      /**
+    /**
      * @var UploadedFile|null
      * @Assert\Image
      */
@@ -73,17 +73,11 @@ class SnowImage
         return $this;
     }
 
-    /**
-     * @return UploadedFile|null
-     */
     public function getFile(): ?UploadedFile
     {
         return $this->file;
     }
 
-    /**
-     * @param UploadedFile|null $file
-     */
     public function setFile(?UploadedFile $file): void
     {
         $this->file = $file;

@@ -14,15 +14,15 @@ class VideoFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('url', TypeTextType::class,[
+        ->add('url', TypeTextType::class, [
             'label' => false,
             'attr' => ['placeholder' => 'Saisir un lien embed. ex : https://www.youtube.com/embed/........'],
             'constraints' => [
                 new Regex([
                     'pattern' => '/embed/',
                     'match' => 'false',
-                    'message' => 'Le lien doit contenir "embed" . ex : https://www.youtube.com/embed/CA5bURVJ5zk'
-                ])
+                    'message' => 'Le lien doit contenir "embed" . ex : https://www.youtube.com/embed/CA5bURVJ5zk',
+                ]),
             ],
         ]);
     }
