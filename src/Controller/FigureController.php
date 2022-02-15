@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\SnowComment;
 use App\Entity\SnowFigure;
 use App\Form\CommentFormType;
+use App\Form\FigureFormType;
 use App\Manager\FigureManagerInterface;
 use App\Repository\SnowCommentRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +61,46 @@ class FigureController extends AbstractController
         ]);
     }
 
+    #[Route('/new', name: 'figure_new')]
+    #[Route('/figure/edit/{slug}', name: 'figure_edit')]
+    public function new(SnowFigure $figure = null, Request $request, FigureManagerInterface $figureManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if (!$figure) {
+            $figure = new SnowFigure();
+        }
+
+        $user = $this->getUser();
+        $form = $this->createForm(FigureFormType::class, $figure);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $isCreated = $figureManager->handleFigure($figure, $user);
+                if ($isCreated) {
+                    $this->addFlash('success', 'La figure a bien été créée');
+                } else {
+                    $this->addFlash('success', 'La figure a bien été modifiée');
+                }
+            } catch (Exception) {
+                $this->addFlash('danger', 'Erreur Système : veuillez ré-essayer');
+
+                return $this->redirectToRoute('home');
+            }
+
+            return $this->redirectToRoute('figure_show', [
+                'slug' => $figure->getSlug(),
+            ]);
+        }
+
+        return $this->render('figure/managedFigure.html.twig', [
+            'figureForm' => $form->createView(),
+            'figure' => $figure,
+            'editMode' => null !== $figure->getId(),
+        ]);
+    }
+
     #[Route('/figure/delete/{slug}', name: 'figure_delete')]
      public function deleteFigure(SnowFigure $figure, FigureManagerInterface $figureManager): Response
      {
@@ -70,8 +110,9 @@ class FigureController extends AbstractController
 
          if ($hasBeenRemoved) {
              $this->addFlash('danger', 'La figure n\'a pas pu être supprimée');
+         } else {
+             $this->addFlash('success', 'La figure a bien été supprimée');
          }
-         $this->addFlash('success', 'La figure a bien été supprimée');
 
          return $this->redirectToRoute('home');
      }

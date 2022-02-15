@@ -21,7 +21,7 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Method getPublishedFigures.
+     * {@inheritdoc}
      */
     public function getPublishedFigures(): array
     {
@@ -31,9 +31,7 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Method getPublishedFiguresLimit.
-     *
-     * @param int $max limit the display to 5 thumbnails when arriving on the home page
+     * {@inheritdoc}
      */
     public function getPublishedFiguresLimit(int $max): array
     {
@@ -43,10 +41,7 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Method getPublishedNumFigure.
-     *
-     * @param int $max       Displays a maximum of 5 thumbnails on each request
-     * @param int $numFigure 5 in 5 thumbnail display
+     * {@inheritdoc}
      */
     public function getPublishedNumFigure(int $max, int $numFigure): array
     {
@@ -56,10 +51,7 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Method getComment.
-     *
-     * @param SnowFigure $snowFigure Contains the information of the figure
-     * @param int        $offset     Contains the comment offset count
+     * {@inheritdoc}
      */
     public function getComment(SnowFigure $snowFigure, int $offset): Paginator
     {
@@ -69,16 +61,7 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Add a new comment.
-     *
-     * @throws Exception
-     */
-    /**
-     * Method newComment.
-     *
-     * @param SnowComment $comment contains the content of the comment
-     * @param SnowFigure  $figure  contains the information of the figure
-     * @param SnowUser    $user    contains user information
+     * {@inheritdoc}
      */
     public function newComment(SnowComment $comment, SnowFigure $figure, SnowUser $user): void
     {
@@ -94,11 +77,52 @@ class FigureManager implements FigureManagerInterface
     }
 
     /**
-     * Method removeFigure.
-     *
-     * @param SnowFigure $figure contains the information of the figure
-     *
-     * @return void
+     * {@inheritdoc}
+     */
+    public function newFigure(SnowFigure $figure, SnowUser $user): void
+    {
+        $slug = $this->slugger->slug($figure->getName())->folded();
+        $figure
+            ->setSlug($slug)
+            ->setCreatedAt(new DateTime())
+            ->setSnowUser($user);
+
+        $this->entityManager->persist($figure);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function editFigure(SnowFigure $figure): void
+    {
+        $slug = $this->slugger->slug($figure->getName())->folded();
+        $figure
+            ->setSlug($slug)
+            ->setEditedAt(new DateTime());
+
+        $this->entityManager->persist($figure);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function handleFigure(SnowFigure $figure, ?SnowUser $user): bool
+    {
+        if (!$figure->getId() && null !== $user) {
+            $this->newFigure($figure, $user);
+
+            return true;
+        } else {
+            $this->editFigure($figure);
+
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function removeFigure(SnowFigure $figure): void
     {

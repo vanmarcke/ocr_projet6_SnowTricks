@@ -43,17 +43,38 @@ interface FigureManagerInterface
      * @param SnowComment $comment returns the content of the comment
      * @param SnowFigure  $figure  returns the id of the figure
      * @param SnowUser    $user    returns user information
-     *
-     * @return void
      */
     public function newComment(SnowComment $comment, SnowFigure $figure, SnowUser $user): void;
+
+    /**
+     * Method newFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     * @param SnowUser   $user   contains user information
+     */
+    public function newFigure(SnowFigure $figure, SnowUser $user): void;
+
+    /**
+     * Method newFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     */
+    public function editFigure(SnowFigure $figure): void;
 
     /**
      * Method removeFigure.
      *
      * @param SnowFigure $figure contains the information of the figure
-     *
-     * @return void
      */
     public function removeFigure(SnowFigure $figure): void;
+
+    /**
+     * Method handleFigure.
+     *
+     * @param SnowFigure $figure contains the information of the figure
+     * @param ?SnowUser  $user   contains user information if not null
+     *
+     * @return bool true if created, false if edited
+     */
+    public function handleFigure(SnowFigure $figure, ?SnowUser $user): bool;
 }
