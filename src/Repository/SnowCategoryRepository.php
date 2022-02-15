@@ -19,6 +19,21 @@ class SnowCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, SnowCategory::class);
     }
 
+    /**
+     * Method findOneByName.
+     *
+     * @param string $name returns the name of the category
+     */
+    public function findOneByName($name): ?SnowCategory
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return SnowCategory[] Returns an array of SnowCategory objects
     //  */
