@@ -22,15 +22,13 @@ class SnowCategoryRepository extends ServiceEntityRepository
     /**
      * Method findOneByName.
      *
-     * @param $value $value returns the name of the category
-     *
-     * @return SnowCategory
+     * @param string $name returns the name of the category
      */
-    public function findOneByName($value): ?SnowCategory
+    public function findOneByName($name): ?SnowCategory
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.name = :val')
-            ->setParameter('val', $value)
+            ->andWhere('s.name = :name')
+            ->setParameter('name', $name)
             ->getQuery()
             ->getOneOrNullResult()
         ;

@@ -77,17 +77,17 @@ class FigureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                if (!$figure->getId()) {
-                    $figureManager->newFigure($figure, $user);
+                $isCreated = $figureManager->handleFigure($figure, $user);
+                if ($isCreated) {
+                    $this->addFlash('success', 'La figure a bien été créée');
                 } else {
-                    $figureManager->editFigure($figure);
+                    $this->addFlash('success', 'La figure a bien été modifiée');
                 }
-            } catch (Exception $ex) {
-                $this->addFlash('danger', $ex->getMessage() . 'Erreur Système : veuillez ré-essayer');
+            } catch (Exception) {
+                $this->addFlash('danger', 'Erreur Système : veuillez ré-essayer');
 
                 return $this->redirectToRoute('home');
             }
-            $this->addFlash('success', 'L\'opération a bien été effectuée');
 
             return $this->redirectToRoute('figure_show', [
                 'slug' => $figure->getSlug(),
@@ -110,8 +110,9 @@ class FigureController extends AbstractController
 
          if ($hasBeenRemoved) {
              $this->addFlash('danger', 'La figure n\'a pas pu être supprimée');
+         } else {
+             $this->addFlash('success', 'La figure a bien été supprimée');
          }
-         $this->addFlash('success', 'La figure a bien été supprimée');
 
          return $this->redirectToRoute('home');
      }
