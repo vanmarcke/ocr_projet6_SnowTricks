@@ -19,7 +19,7 @@ class ImageFormType extends AbstractType
             'attr' => ['placeholder' => 'Déposer votre image'],
             'required' => false,
             'constraints' => [
-                new ConstraintsImage()
+                new ConstraintsImage(),
             ],
         ]);
     }

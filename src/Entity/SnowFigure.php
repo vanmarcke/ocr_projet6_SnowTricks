@@ -36,7 +36,7 @@ class SnowFigure
     #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowImage::class, cascade: ['persist'], orphanRemoval: true)]
     private $images;
 
-    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowVideo::class, cascade: ['persist'],  orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowVideo::class, cascade: ['persist'], orphanRemoval: true)]
     private $videos;
 
     #[ORM\OneToMany(mappedBy: 'snowFigure', targetEntity: SnowComment::class, orphanRemoval: true)]
@@ -155,6 +155,7 @@ class SnowFigure
     {
         $image->setSnowFigure(null);
         $this->images->removeElement($image);
+
         return $this;
     }
 
@@ -181,6 +182,7 @@ class SnowFigure
     {
         $video->setSnowFigure(null);
         $this->videos->removeElement($video);
+
         return $this;
     }
 
