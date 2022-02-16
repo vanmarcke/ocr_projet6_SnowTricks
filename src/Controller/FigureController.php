@@ -16,6 +16,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FigureController extends AbstractController
 {
+    #[Route('/figures/list', name: 'figures_list')]
+    public function figuresList(FigureManagerInterface $figureManager): Response
+    {
+        $figuresList = $figureManager->getListFigures();
+
+        return $this->render('figure/listFigures.html.twig', [
+            'controller_name' => 'FigureController',
+            'figures' => $figuresList,
+        ]);
+    }
+
     #[Route('/figure/{slug}', name: 'figure_show')]
     public function index(Request $request, FigureManagerInterface $figureManager, SnowFigure $figure): Response
     {

@@ -23,6 +23,16 @@ class FigureManager implements FigureManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function getListFigures(): array
+    {
+        $figuresList = $this->snowFigureRepository->findBy([], ['id' => 'DESC']);
+
+        return $figuresList;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPublishedFigures(): array
     {
         $figuresPublished = $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC']);
