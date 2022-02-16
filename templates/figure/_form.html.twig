@@ -20,7 +20,7 @@
         class="add-another-collection-widget btn-sm btn-primary mr-2"
         data-list-selector="#image-list"><i class="fas fa-plus"></i></button>
     </button>
-    <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false"> {# Sur mobile, un bouton affichera les images pour les suppressions #}
+    <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false">
         Afficher la liste
     </button> 
 </div>
@@ -32,7 +32,7 @@
     <div class="collapse dont-collapse-sm  text-center" id="collapseImage">
     {% for image in figureForm.images %}    
         {{ form_errors(image) }}
-        <li class="list-inline-item image-list-miniature"> {# le champ téléchargement est masqué quand il y a une image #}
+        <li class="list-inline-item image-list-miniature">
             {% if image.vars.data is not null and image.vars.data.src is not null %}
             <img src="{{ asset(image.vars.data.src) }}" alt="" width="250" height="150">
             {% endif %}
@@ -55,7 +55,7 @@
         class="add-another-collection-widget btn-sm btn-primary mr-2"
         data-list-selector="#video-list"><i class="fas fa-plus"></i></button>
     </button>
-    <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseVideo" aria-expanded="false"> {# Sur mobile, un bouton affichera les vidéos pour les suppressions #}
+    <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseVideo" aria-expanded="false">
         Afficher la liste
     </button>  
 </div>
