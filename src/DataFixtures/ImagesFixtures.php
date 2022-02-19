@@ -23,7 +23,7 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
                 'src' => '/img/demo/mute2.jpg', ],
 
             ['name' => 'Mute',
-                'src' => '/img/demo/mute3.jpg', ],
+                'src' => '/img/demo/mute3.webp', ],
 
             ['name' => 'Sad',
                 'src' => '/img/demo/sad.jpg', ],

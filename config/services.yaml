@@ -4,6 +4,8 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+  imageDirAvatar : '/img/avatarUser'
+  avatarAbsoluteDir: '%kernel.project_dir%/public/img/avatarUser'
   imageDir : '/img/photosFigures'
   imageAbsoluteDir: '%kernel.project_dir%/public/img/photosFigures'
 
@@ -13,6 +15,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
+          $imageDirAvatar : '%imageDirAvatar%'
+          $avatarAbsoluteDir : '%avatarAbsoluteDir%'
           $imageDir : '%imageDir%'
           $imageAbsoluteDir : '%imageAbsoluteDir%'
 
