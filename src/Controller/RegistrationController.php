@@ -22,9 +22,12 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    private string $imageDirAvatar;
+
+    public function __construct(EmailVerifier $emailVerifier, string $imageDirAvatar)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->imageDirAvatar = $imageDirAvatar;
     }
 
     #[Route('/inscription', name: 'app_register')]
@@ -50,6 +53,15 @@ class RegistrationController extends AbstractController
             );
 
             $user->setCreatedAt(new DateTime());
+
+            $avatar = $form->get('avatar')->getData();
+            if ($avatar) {
+                $nameavatar = random_int(1, 999) . '-' . 'SnowAvatar' . '-' . $avatar->getClientOriginalName();
+                $nameavatar = str_replace(' ', '_', $nameavatar);
+                $avatar->move($this->getParameter('avatarAbsoluteDir'), $nameavatar);
+
+                $user->setAvatar(sprintf("%s/%s",$this->imageDirAvatar, $nameavatar));
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();
