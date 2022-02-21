@@ -12,9 +12,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProfileFormType extends AbstractType
 {
+    public function __construct(private TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -23,8 +29,8 @@ class ProfileFormType extends AbstractType
             'required' => false,
             'constraints' => [
                 new File([
-                    'maxSize' => '2048k',
-                    'maxSizeMessage' => 'le fichier ne doit pas faire plus de 2Mo',
+                    'maxSize' => '48k',
+                    'maxSizeMessage' => $this->translator->trans('The file must not be larger than 2MB'),
                 ]),
             ],
         ])
@@ -44,7 +50,7 @@ class ProfileFormType extends AbstractType
                 'constraints' => [
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
+                        'minMessage' => $this->translator->trans('Your password must be at least {{ limit }} characters long.'),
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
@@ -52,7 +58,7 @@ class ProfileFormType extends AbstractType
             ],
             'second_options' => [
             ],
-            'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
+            'invalid_message' => $this->translator->trans('Password fields must match.'),
             'mapped' => false,
             'required' => false,
         ]);

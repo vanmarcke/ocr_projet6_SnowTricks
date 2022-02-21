@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}{% trans %}Home{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -8,8 +8,8 @@
 	<!-- ======= Hero Section ======= -->
 	<section id="hero">
 		<div class="hero-container" data-aos="fade-up">
-			<h1>Bienvenue sur SnowTricks</h1>
-			<h2>Le site communautaire qui regroupe tous les tricks du Snowboard</h2>
+			<h1>{% trans %}Welcome to SnowTricks {% endtrans %}</h1>
+			<h2>{% trans %}The community site that brings together all the Snowboard tricks{% endtrans %}</h2>
 			<a href="#portfolio" class="btn-get-started scrollto">
 				<i class="bx bx-chevrons-down"></i>
 			</a>
@@ -24,7 +24,7 @@
 		<section id="portfolio" class="portfolio ">
 			<div class="container">
 				<div class="section-title" data-aos="fade-in" data-aos-delay="100">
-					<h2>Les Figures</h2>
+					<h2>{% trans %}The Figures{% endtrans %}</h2>
 				</div>
 				<div id="blockTricks" class="container my-5">
 					<div class="row">
@@ -34,7 +34,7 @@
 			</div>
 
 			{# BLOC de Figures : Voir plus #}
-			<p class="load-more">Voir Plus</p>
+			<p class="load-more">{% trans %}See more{% endtrans %}</p>
 			<input type="hidden" id="numFigure" value="0">
 			<input type="hidden" id="all" value=" {{ nbFigures }}">
 

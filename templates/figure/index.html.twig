@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SnowTricks /{{ figure.name }}
+{% block title %}{% trans %}Figure{% endtrans %} / {{ figure.name }}
 {% endblock %}
 
 {% block body %}
@@ -51,12 +51,12 @@
 					{% endif %}
 					<ol>
 						<li>
-							<a href="{{ path('home') }}">Home</a>
+							<a href="{{ path('home') }}">{% trans %}Home{% endtrans %}</a>
 						</li>
 						<li>
-							<a href="{{ path('figures_list')}} ">Figures</a>
+							<a href="{{ path('figures_list')}} ">{% trans %}Figures{% endtrans %}</a>
 						</li>
-						<li>Détails de la figure :
+						<li>{% trans %}Figure details:{% endtrans %}
 							{{ figure.name }}</li>
 					</ol>
 				</div>
@@ -73,7 +73,7 @@
 				<div class="row gy-4">
 					<div class="text-center my-1">
 						<button class="btn btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseIndicators" aria-expanded="false">
-							Voir les images
+							{% trans %}See pictures{% endtrans %}
 						</button>
 					</div>
 					<div class="col-lg-8 collapse dont-collapse-sm" id="collapseIndicators">
@@ -130,23 +130,23 @@
 
 					<div class="col-lg-4">
 						<div class="portfolio-info">
-							<h3>Informations sur la figure</h3>
+							<h3>{% trans %}Figure Information{% endtrans %}</h3>
 							<ul>
 								<li>
-									<strong>Catégorie
+									<strong>{% trans %}Category{% endtrans %}
 									</strong>:
 									{{ figure.snowcategory.name }}</li>
 								<li>
-									<strong>Ecrite par
+									<strong>{% trans %}Written by{% endtrans %}
 									</strong>:
 									{{ figure.snowuser.username }}</li>
 								<li>
-									<strong>Créée le
+									<strong>{% trans %}Created on{% endtrans %}
 									</strong>:
 									{{ figure.createdAt|date('d-m-Y') }}</li>
 								{% if figure.editedAt %}
 									<li>
-										<strong>Modifiée le
+										<strong>{% trans %}Modified on{% endtrans %}
 										</strong>
 										:
 										{{ figure.editedAt ? figure.editedAt|date('d-m-Y') : '' }}</li>
@@ -157,7 +157,7 @@
 
 					<div class="col-lg-12">
 						<div class="portfolio-description">
-							<h2>Description</h2>
+							<h2>{% trans %}Description{% endtrans %}</h2>
 							<p>{{ figure.description }}
 							</p>
 						</div>
@@ -165,7 +165,7 @@
 
 					<div class="pt-5">
 						{% if comments|length > 0 %}
-							<h3 class="mb-5">Commentaire(s)</h3>
+							<h3 class="mb-5">{% trans %}Comment(s){% endtrans %}</h3>
 							<ul class="comment-list">
 								{% for comment in comments %}
 									<li class="comment">
@@ -180,8 +180,9 @@
 										<div class="comment-body">
 											<h3>{{ comment.snowuser.username }}
 											</h3>
-											<div class="meta">Posté le
-												{{ comment.createdAt ? comment.createdAt|date('d/m/Y à H:i' ) : '' }}</div>
+											<div class="meta">{% trans %}Posted the{% endtrans %}
+												{{ comment.createdAt ? comment.createdAt|date('Y/m/d a H:i'|trans) : '' }}</div>
+												{# {{ comment.createdAt ? comment.createdAt|date('d/m/Y à H:i'|trans) : '' }}</div> #}
 											<p>{{ comment.content }}
 											</p>
 										</div>
@@ -198,17 +199,17 @@
 								{% if next < comments|length %}
 									<a href="{{ path('figure_show', {'slug': figure.slug, offset: next }) }}">
 										<i class="fas fa-forward shadow-sm p-3 mb-5 bg-white rounded">
-											Voir plus de comm....</i>
+											{% trans %}See more comm....{% endtrans %}</i>
 									</a>
 								{% endif %}
 							{% else %}
 								<div class="text-center text-primary">
-									<h4>Aucun commentaire n'a été posté pour cette figure !
+									<h4>{% trans %}No comments have been posted for this figure!{% endtrans %}
 										<i class="bi bi-emoji-frown"></i>
 									</h4>
 								</div>
 								<div class="text-center text-primary">
-									<h4>Soyez le premier !!!
+									<h4>{% trans %}Be the first !!!{% endtrans %}
 										<i class="bi bi-emoji-smile"></i>
 									</h4>
 								</div><br>
@@ -220,16 +221,16 @@
 						{% if is_granted('ROLE_USER') %}
 
 							<div class="comment-form-wrap pt-5">
-								<h3 class="mb-5">Laisser un commentaire :</h3>
+								<h3 class="mb-5">{% trans %}Leave a comment :{% endtrans %}</h3>
 								{{ form_start(commentForm) }}
 								{{ form_row(commentForm.content) }}
-								<button type="submit" class="btn-primary">Envoyer</button>
+								<button type="submit" class="btn-primary">{% trans %}Send{% endtrans %}</button>
 								{{ form_end(commentForm) }}
 							</div>
 						{% else %}
 							<div class="text-center">
 								<a href="{{ path('app_login') }}">
-									<button class="btn-primary">Laisser un commentaire ? Connectez-vous !</button>
+									<button class="btn-primary">{% trans %}Leave a comment ? Log in!{% endtrans %}</button>
 								</a>
 							</div>
 						{% endif %}

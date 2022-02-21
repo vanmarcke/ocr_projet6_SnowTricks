@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FigureController extends AbstractController
 {
@@ -28,11 +29,12 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure/{slug}', name: 'figure_show')]
-    public function index(Request $request, FigureManagerInterface $figureManager, SnowFigure $figure): Response
+    public function index(Request $request, FigureManagerInterface $figureManager, SnowFigure $figure, TranslatorInterface $translator): Response
     {
         // Back to home page if the requested figure is not published
         if (!$figure->getPublish()) {
-            $this->addFlash('danger', 'Cette figure n\'est pas publiée !');
+            $message = $translator->trans('This figure is not published!');
+            $this->addFlash('danger', $message);
 
             return $this->redirectToRoute('home');
         }
@@ -46,13 +48,15 @@ class FigureController extends AbstractController
             try {
                 $figureManager->newComment($comment, $figure, $user);
             } catch (Exception) {
-                $this->addFlash('danger', 'Erreur Système : veuillez ré-essayer');
+                $message = $translator->trans('System error: please try again');
+                $this->addFlash('danger', $message);
 
                 return $this->redirectToRoute('figure_show', [
                     'slug' => $figure->getSlug(),
                 ]);
             }
-            $this->addFlash('success', 'Votre commentaire a bien été ajouté');
+            $message = $translator->trans('your comment has been added');
+            $this->addFlash('success', $message);
 
             return $this->redirectToRoute('figure_show', [
                 'slug' => $figure->getSlug(),
@@ -74,7 +78,7 @@ class FigureController extends AbstractController
 
     #[Route('/new', name: 'figure_new')]
     #[Route('/figure/edit/{slug}', name: 'figure_edit')]
-    public function new(SnowFigure $figure = null, Request $request, FigureManagerInterface $figureManager): Response
+    public function new(SnowFigure $figure = null, Request $request, FigureManagerInterface $figureManager, TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -90,12 +94,15 @@ class FigureController extends AbstractController
             try {
                 $isCreated = $figureManager->handleFigure($figure, $user);
                 if ($isCreated) {
-                    $this->addFlash('success', 'La figure a bien été créée');
+                    $message = $translator->trans('The figure has been created successfully');
+                    $this->addFlash('success', $message);
                 } else {
-                    $this->addFlash('success', 'La figure a bien été modifiée');
+                    $message = $translator->trans('The figure has been modified');
+                    $this->addFlash('success', $message);
                 }
             } catch (Exception) {
-                $this->addFlash('danger', 'Erreur Système : veuillez ré-essayer');
+                $message = $translator->trans('System error: please try again');
+                $this->addFlash('danger', $message);
 
                 return $this->redirectToRoute('figure_edit');
             }
@@ -113,16 +120,18 @@ class FigureController extends AbstractController
     }
 
     #[Route('/figure/delete/{slug}', name: 'figure_delete')]
-     public function deleteFigure(SnowFigure $figure, FigureManagerInterface $figureManager): Response
+     public function deleteFigure(SnowFigure $figure, FigureManagerInterface $figureManager, TranslatorInterface $translator): Response
      {
          $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
          $hasBeenRemoved = $figureManager->removeFigure($figure);
 
          if ($hasBeenRemoved) {
-             $this->addFlash('danger', 'La figure n\'a pas pu être supprimée');
+             $message = $translator->trans('Figure could not be deleted');
+             $this->addFlash('danger', $message);
          } else {
-             $this->addFlash('success', 'La figure a bien été supprimée');
+             $message = $translator->trans('Figure has been deleted');
+             $this->addFlash('success', $message);
          }
 
          return $this->redirectToRoute('figures_list');

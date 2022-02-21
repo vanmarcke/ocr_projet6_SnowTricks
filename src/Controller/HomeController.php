@@ -37,4 +37,13 @@ class HomeController extends AbstractController
             'figures' => $figures,
         ]);
     }
+
+    #[Route('/change_locale/{locale}', name: 'change_locale')]
+    public function changeLocale(string $locale, Request $request): Response
+    {
+        $request->getSession()->set('_locale', $locale);
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
 }

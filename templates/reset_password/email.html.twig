@@ -58,7 +58,7 @@
 										<tr>
 											<td align="center" style="font-size:0px;padding:0px;word-break:break-word;">
 												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:18px;font-weight:500;line-height:24px;text-align:center;color:#616161;">
-													Mot de passe oublié ?
+													{% trans %}Forgot your password ?{% endtrans %}
 												</div>
 											</td>
 										</tr>
@@ -85,15 +85,15 @@
 										<tr>
 											<td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:left;color:#616161;">
-													<p>Bonjour,</p>
-													<p>Vous avez fait une demande pour réinitialiser votre mot de passe, cliquez sur le bouton ci-dessous pour réinitialiser votre mot de passe.</p>
-													<p>Ou copier/coller le lien dans votre navigateur :
+													<p>{% trans %}Hello,{% endtrans %}</p>
+													<p>{% trans %}You have made a request to reset your password, click on the button below to reset your password.{% endtrans %}</p>
+													<p>{% trans %}Or copy/paste the link in your browser:{% endtrans %}
 													</p>
 													<a href="{{ url('app_reset_password', {token : resetToken.token}) }}">{{ url('app_reset_password', {token : resetToken.token}) }}</a>
-													<p>Ce lien expirera dans
+													<p>{% trans %}This link will expire in{% endtrans %}
 														{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')}}.</p>
 													<p style="text-align: center; margin: 3rem;">
-														<a href="{{ url('app_reset_password', {token : resetToken.token}) }}" style="background: #2daa74; color: white; text-decoration: none; padding: 1.3rem; font-weight: 600; text-transform: uppercase; border-radius: .35rem; text-align: center; width: 100%;">Réinitialiser</a>
+														<a href="{{ url('app_reset_password', {token : resetToken.token}) }}" style="background: #2daa74; color: white; text-decoration: none; padding: 1.3rem; font-weight: 600; text-transform: uppercase; border-radius: .35rem; text-align: center; width: 100%;">{% trans %}Reset{% endtrans %}</a>
 													</p>
 												</div>
 											</td>
@@ -132,7 +132,7 @@
 										<tr>
 											<td align="left" style="font-size:0px;padding:0 25px;word-break:break-word;">
 												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:left;color:#616161;">
-													<p style="color:#BDBDBD; line-height: 9px">Cordialement l'équipe</p>
+													<p style="color:#BDBDBD; line-height: 9px">{% trans %}Sincerely the team{% endtrans %}</p>
 													<p style="font-style: italic; color:#BDBDBD; line-height: 9px">
 														VMKDEV.com
 													</p>

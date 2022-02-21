@@ -14,54 +14,60 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationFormType extends AbstractType
 {
+    public function __construct(private TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('username')
             ->add('email')
             ->add('avatar', FileType::class, [
-                "required" => false,
-                "mapped" => false,
-                "constraints" => [
+                'required' => false,
+                'mapped' => false,
+                'constraints' => [
                     new File([
-                        "maxSize" => "2048k" ,
-                        "maxSizeMessage" => "le fichier ne doit pas faire plus de 2Mo"
-                    ])
-                ]
+                        'maxSize' => '2048k',
+                        'maxSizeMessage' => $this->translator->trans('The file must not be larger than 2MB'),
+                    ]),
+                ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devez accepter nos conditions.',
+                        'message' => $this->translator->trans('You must agree to our terms.'),
                     ]),
                 ],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
-                    'attr' => ['placeholder' => 'Votre Mot de passe'],
+                    'attr' => ['placeholder' => $this->translator->trans('Your password*')],
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Veuillez entrer un mot de passe',
+                            'message' => $this->translator->trans('Please enter a password'),
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
+                            'minMessage' => $this->translator->trans('Your password must be at least {{ limit }} characters long.'),
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'Mot de passe*',
+                    'label' => $this->translator->trans('Password*'),
                 ],
                 'second_options' => [
-                    'attr' => ['placeholder' => 'Répéter votre Mot de passe'],
-                    'label' => 'Répéter le mot de passe*',
+                    'attr' => ['placeholder' => $this->translator->trans('Repeat your Password*')],
+                    'label' => $this->translator->trans('Repeat your Password*'),
                 ],
-                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
+                'invalid_message' => $this->translator->trans('Password fields must match.'),
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,

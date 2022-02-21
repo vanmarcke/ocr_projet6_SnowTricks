@@ -5,7 +5,7 @@
 		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 		<title>{% block title %}{% endblock %}</title>
-		<meta content="Le site communautaire qui regroupe tous les tricks du Snowboard" name="description">
+		<meta content="{% trans %}The community site that brings together all the Snowboard tricks{% endtrans %}" name="description">
 		<meta content="HTML, CSS, JavaScript, PHP, TWIG" name="keywords">
 		<meta
 		name="author" content="Frédéric Vanmarcke">
@@ -70,7 +70,7 @@
 							<div class="footer-info">
 								<h3>VMKDEV</h3>
 								<p class="pb-3">
-									<em>Développeur - Intégrateur Web & Web Mobile.</em>
+									<em>{% trans %}Developer - Web and Mobile Web Integrator.{% endtrans %}</em>
 								</p>
 								<p>
 									25, avenue des Champs Elysées
@@ -100,41 +100,41 @@
 						</div>
 
 						<div class="col-lg-6 col-md-6 footer-links">
-							<h4>Liens utiles</h4>
+							<h4>{% trans %}Useful links{% endtrans %}</h4>
 							<ul>
 								<li>
 									<i class="bx bx-chevron-right"></i>
-									<a href="{{ path('home') }} ">Accueil</a>
+									<a href="{{ path('home') }}">{% trans %}Home{% endtrans %}</a>
 								</li>
 								<li>
 									<i class="bx bx-chevron-right"></i>
-									<a href="{{ path('figures_list')}}">Figures</a>
+									<a href="{{ path('figures_list')}}">{% trans %}Figures{% endtrans %}</a>
 								</li>
 								<li>
 									<i class="bx bx-chevron-right"></i>
-									<a href="#">Conditions d'utilisation</a>
+									<a href="#">{% trans %}Terms of use{% endtrans %}</a>
 								</li>
 								{% if is_granted('ROLE_USER') %}
 									<li>
 										<i class="bx bx-chevron-right"></i>
-										<a href="{{ path('figure_new')}} ">Ajouter Figure</a>
+										<a href="{{ path('figure_new')}} ">{% trans %}Add figure{% endtrans %}</a>
 									</li>
 									<li>
 										<i class="bx bx-chevron-right"></i>
-										<a href="{{ path('app_profile')}}">Profil</a>
+										<a href="{{ path('app_profile')}}">{% trans %}Profile{% endtrans %}</a>
 									</li>
 									<li>
 										<i class="bx bx-chevron-right"></i>
-										<a href="{{ path('app_logout') }}">Déconnexion</a>
+										<a href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
 									</li>
 								{% else %}
 									<li>
 										<i class="bx bx-chevron-right"></i>
-										<a href="{{ path('app_login') }}">Connexion</a>
+										<a href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a>
 									</li>
 									<li>
 									<i class="bx bx-chevron-right"></i>
-									<a href="{{ path('app_register') }}">Inscription</a>
+									<a href="{{ path('app_register') }}">{% trans %}Registration{% endtrans %}</a>
 								</li>
 								{% endif %}
 							</ul>
@@ -149,10 +149,10 @@
 					&copy; Copyright
 					<strong>
 						<span>VMKDEV</span>
-					</strong>. Tous droits réservés
+					</strong>{% trans %}. All rights reserved{% endtrans %}
 				</div>
 				<div class="credits">
-					Conçu par
+					{% trans %}Conceived by{% endtrans %}
 					<a href="https://vmkdev.com/">Frédéric Vanmarcke</a>
 				</div>
 			</div>

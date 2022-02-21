@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le Profil
+{% block title %}
+	{% trans %}Modify the profile{% endtrans %}
 {% endblock %}
 
 
@@ -11,11 +12,13 @@
 		<div id="portfolio" class="hero-container" data-aos="fade-up">
 
 			<div class="section-title">
-				<h1>Modifier votre Profil</h1>
+				<h1>{% trans %}Edit your Profile{% endtrans %}</h1>
 			</div>
 
-			
-			<p class="text-white font-weight-bold">{{ user.username }} . Votre Avatar actuel :</p>
+
+			<p class="text-white font-weight-bold">{{ user.username }}
+				.{% trans %}
+				Your current Avatar :{% endtrans %}</p>
 			{% if user.avatar is empty %}
 				<img src="/img/avatardefaut.jpg" class="img-fluid">
 			{% else %}
@@ -24,65 +27,42 @@
 
 			<div class="col-lg-4 text-white text-left font-weight-bold mt-3">
 
-			<div class="text-white text-center font-weight-bold">
-				<p>*Champs Obligatoires pour valider les changements</p>
-			</div>
+				<div class="text-white text-center font-weight-bold">
+					<p>{% trans %}*Mandatory fields to validate the changes{% endtrans %}</p>
+				</div>
 
 				{{ form_start(form) }}
 				{{ form_row(form.newavatar, {
-                label: 'Enregistrer un nouvel avatar :' }) }}
+                label: 'Register a new avatar:'|trans }) }}
 
 				{{ form_row(form.newpseudo, {
-                label: 'Enregistrer un nouveau Pseudo :' }) }}
+                label: 'Register a new Nickname:'|trans }) }}
 
 				{{ form_row(form.passwordold, {
-                label: 'Votre Mot de passe actuel* :' }) }}
+                label: 'Your current password*:'|trans }) }}
 
 				{{ form_row(form.newpassword.pass, {
-                label: 'Enregistrer un nouveau Mot de passe :' }) }}
+                label: 'Register a new Password:'|trans }) }}
 
 				{{ form_row(form.newpassword.confirm, {
-                label: 'Confirmer le nouveau Mot de passe :' }) }}
-				
+                label: 'Confirm the new password :'|trans }) }}
 
 
-
-				<button type="submit" class="btn-primary">Enregistrer</button>
+				<button type="submit" class="btn-primary">{% trans %}Save{% endtrans %}</button>
 
 				{{ form_end(form) }}
-				
+
 			</div>
 		</div>
 	</section>
-<!-- End Hero -->
-<main id="main"></main>
+	<!-- End Hero -->
+	<main id="main"></main>
 
-{# <div class="container w-75 my-5 py-3 border">
-
-		<h1>Modifier votre photo de profil</h1>
-
-		<p>({{ user.username }}) Votre avatar actuel:
-		</p>
-		{% if user.avatar is empty %}
-			<img src="/img/avatardefaut.jpg" class="img-fluid" width="100px">
-		{% else %}
-			<img src="{{ user.avatar }}" class="img-fluid" width="100px">
-		{% endif %}
-
-		<hr>
-
-		{{ form_start(form) }}
-		{{ form_row(form.avatar, {
-                label: 'Enregistrer un nouvel avatar:', value: ''}) 
-            }}
-
-		<button type="submit" class="btn-primary">Enregistrer</button>
-
-		{{ form_end(form) }}
-
-	</div> #}{% endblock %}{% block textJS %}
-<script>
-	$(document).ready(function () {
+{% endblock %}
+{% block textJS %}
+	<script>
+		$(document).ready(function () {
 bsCustomFileInput.init()
 })
-</script>{% endblock %}
+	</script>
+{% endblock %}

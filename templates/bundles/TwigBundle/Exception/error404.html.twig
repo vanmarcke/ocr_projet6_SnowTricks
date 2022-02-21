@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{% trans %}Error 404{% endtrans %}
+{% endblock %}
+
+
 {% block body %}
 	<!-- ======= Hero Section form ======= -->
 	<section id="hero">
 		<div class="hero-container" data-aos="fade-up">
 			<div class="section-title">
-				<h1>Page introuvable</h1>
+				<h1>{% trans %}Page not found{% endtrans %}</h1>
 			</div>
 			<img src="\img\smiley.webp" alt="oops" width="200px">
 			<h2>
 				<a href="{{ path('home') }}">
-					<button class="btn btn-primary">Retour Acceuil</button>
+					<button class="btn btn-primary">{% trans %}Back to home{% endtrans %}</button>
 				</a>
 			</h2>
 		</div>

@@ -8,20 +8,26 @@ use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class VideoFormType extends AbstractType
 {
+    public function __construct(private TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
         ->add('url', TypeTextType::class, [
             'label' => false,
-            'attr' => ['placeholder' => 'Saisir un lien embed. ex : https://www.youtube.com/embed/........'],
+            'attr' => ['placeholder' => $this->translator->trans('Enter an embed link. eg: https://www.youtube.com/embed/........')],
             'constraints' => [
                 new Regex([
                     'pattern' => '/embed/',
                     'match' => 'false',
-                    'message' => 'Le lien doit contenir "embed" . ex : https://www.youtube.com/embed/CA5bURVJ5zk',
+                    'message' => $this->translator->trans('The link must contain "embed" . eg: https://www.youtube.com/embed/CA5bURVJ5zk'),
                 ]),
             ],
         ]);

@@ -2,26 +2,26 @@
 
 {{ form_widget(figureForm._token) }}
 
-{{ form_row(figureForm.name, { label: 'Titre' }) }}
+{{ form_row(figureForm.name, { label: 'Title'|trans }) }}
 
-{{ form_row(figureForm.description, { label: 'Description' }) }}
+{{ form_row(figureForm.description, { label: 'Description'|trans }) }}
 
-{{ form_row(figureForm.snowCategory, { label: 'Catégorie' }) }}
+{{ form_row(figureForm.snowCategory, { label: 'Category'|trans }) }}
 
-{{ form_row(figureForm.publish, { label: 'Publié' }) }}
+{{ form_row(figureForm.publish, { label: 'Publish'|trans }) }}
 
 <hr>
 {# PHOTOS  #}
 <div class="d-flex justify-content-start mb-1">
     <div class="mr-2">
-        {{ form_label(figureForm.images, 'Images') }}
+        {{ form_label(figureForm.images, 'Pictures'|trans) }}
     </div>
     <button type="button"
         class="add-another-collection-widget btn-sm btn-primary mr-2"
         data-list-selector="#image-list"><i class="fas fa-plus"></i></button>
     </button>
     <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseImage" aria-expanded="false">
-        Afficher la liste
+        {% trans %}Show list{% endtrans %}
     </button> 
 </div>
          
@@ -49,14 +49,14 @@
 {# VIDEOS #}
 <div class="d-flex justify-content-start mb-1">
     <div class="mr-2">
-        {{ form_label(figureForm.videos, 'Vidéos') }}
+        {{ form_label(figureForm.videos, 'Videos'|trans) }}
     </div>       
     <button type="button"
         class="add-another-collection-widget btn-sm btn-primary mr-2"
         data-list-selector="#video-list"><i class="fas fa-plus"></i></button>
     </button>
     <button class="btn-sm btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseVideo" aria-expanded="false">
-        Afficher la liste
+        {% trans %}Show list{% endtrans %}
     </button>  
 </div>
     
@@ -79,7 +79,7 @@
 <hr>
 {# BOUTON SAVE #}  
 <div class="blockcenter">
-    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-primary">{{ button_label|default('Save'|trans) }}</button>
 </div>
 {# BOUTON SAVE #}
 

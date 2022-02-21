@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion
+{% block title %}{% trans %}Login{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -10,11 +10,11 @@
 		<div class="hero-container" data-aos="fade-up">
 
 			<div class="section-title">
-				<h1>Connectez vous !</h1>
+				<h1>{% trans %}Connect!{% endtrans %}</h1>
 			</div>
 			<h2>
 				<a href="{{ path('app_register')}} ">
-					<button class="btn btn-primary">Pas encore de compte ? Inscrivez-vous !</button>
+					<button class="btn btn-primary">{% trans %}No account yet? Sign up!{% endtrans %}</button>
 				</a>
 			</h2>
 			<div class="col-lg-4 text-white text-left font-weight-bold">
@@ -23,19 +23,19 @@
 						<div class="alert alert-danger d-table mx-auto">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 					{% endif %}
 
-					<label for="inputName">Pseudo</label>
+					<label for="inputName">{% trans %}Pseudo{% endtrans %}</label>
 					<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-					<label for="inputPassword">Mot de passe</label>
+					<label for="inputPassword">{% trans %}Password{% endtrans %}</label>
 					<input type="password" name="password" id="inputPassword" class="form-control" required>
 
 					<div class="blockcenter">
 						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"><br>
 
-						<button class="btn btn btn-primary" type="submit">Valider</button>
+						<button class="btn btn btn-primary" type="submit">{% trans %}To validate{% endtrans %}</button>
 					</form><br>
 
 					<a href="{{ path('app_forgot_password_request') }}">
-						<h7 class="text-white">Mot de passe oublié ?</h7>
+						<h7 class="text-white">{% trans %}Forgot your password ?{% endtrans %}</h7>
 					</a>
 				</div>
 			</div>

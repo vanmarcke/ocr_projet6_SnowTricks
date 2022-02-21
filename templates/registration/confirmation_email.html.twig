@@ -58,7 +58,7 @@
 										<tr>
 											<td align="center" style="font-size:0px;padding:0px;word-break:break-word;">
 												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:18px;font-weight:500;line-height:24px;text-align:center;color:#616161;">
-													Bienvenue sur SnowTricks
+													{% trans %}Welcome to SnowTricks{% endtrans %}
 												</div>
 											</td>
 										</tr>
@@ -84,12 +84,12 @@
 										<tr>
 											<td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:left;color:#616161;">
-													<p>Bonjour,</p>
-													<p>Votre compte a été créé avec succès vous pouvez dès maintenant vous connecter avec vos identifiants.</p>
-													<p>Toutefois, veuillez confirmer votre adresse e-mail en cliquant sur Confirmer : Ce lien expirera dans
+													<p>{% trans %}Hello,{% endtrans %}</p>
+													<p>{% trans %}Your account has been successfully created, you can now log in with your credentials.{% endtrans %}</p>
+													<p>{% trans %}However, please confirm your email address by clicking Confirm: This link will expire in{% endtrans %}
 														{{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.</p>
 													<p style="text-align: center; margin: 3rem;">
-														<a href="{{signedUrl }}" style="background: #2daa74; color: white; text-decoration: none; padding: 1.3rem; font-weight: 600; text-transform: uppercase; border-radius: .35rem; text-align: center; width: 100%;">Confirmer</a>
+														<a href="{{signedUrl }}" style="background: #2daa74; color: white; text-decoration: none; padding: 1.3rem; font-weight: 600; text-transform: uppercase; border-radius: .35rem; text-align: center; width: 100%;">{% trans %}To confirm{% endtrans %}</a>
 													</p>
 												</div>
 											</td>
@@ -128,7 +128,7 @@
 										<tr>
 											<td align="left" style="font-size:0px;padding:0 25px;word-break:break-word;">
 												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:left;color:#616161;">
-													<p style="color:#BDBDBD; line-height: 9px">Cordialement l'équipe</p>
+													<p style="color:#BDBDBD; line-height: 9px">{% trans %}Sincerely the team{% endtrans %}</p>
 													<p style="font-style: italic; color:#BDBDBD; line-height: 9px">
 														SnowTricks.com
 													</p>

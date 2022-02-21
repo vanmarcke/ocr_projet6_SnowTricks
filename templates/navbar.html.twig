@@ -11,26 +11,35 @@
 			<!-- La navbar est cachée sur petit écran et apparait sur grand écran-->
 			<nav id="navbar" class="navbar">
 				<ul>
+					{% for locale in locales %}
+						{% if locale != app.request.locale %}
+							<li>
+								<a class="nav-link scrollto" href="{{ path('change_locale', {'locale': locale}) }}"><img src="{{ asset('img/'~locale~'.png')}}" alt="{{locale}}">
+								</a>
+							</li>
+						{% endif %}
+					{% endfor %}
+
 					<li>
-						<a class="nav-link scrollto" href="{{ path('home') }}">Accueil</a>
+						<a class="nav-link scrollto" href="{{ path('home') }}">{% trans %}Home{% endtrans %}</a>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="{{ path('figures_list')}}">Figures</a>
+						<a class="nav-link scrollto" href="{{ path('figures_list')}}">{% trans %}Tricks{% endtrans %}</a>
 					</li>
 					<li>
 						{% if is_granted('ROLE_USER') %}
-							<a class="nav-link scrollto" href="{{ path('figure_new')}}">Ajouter Figure</a>
+							<a class="nav-link scrollto" href="{{ path('figure_new')}}">{% trans %}Add figure{% endtrans %}</a>
 						</li>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="{{ path('app_profile')}}">Profil</a>
+						<a class="nav-link scrollto" href="{{ path('app_profile')}}">{% trans %}Profile{% endtrans %}</a>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="{{ path('app_logout') }}">Déconnexion</a>
+						<a class="nav-link scrollto" href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a>
 					</li>
 				{% else %}
 					<li>
-						<a class="nav-link scrollto" href="{{ path('app_login') }}">Connexion</a>
+						<a class="nav-link scrollto" href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a>
 					</li>
 				{% endif %}
 			</ul>
@@ -39,8 +48,15 @@
 		<!-- .navbar -->
 	</div>
 
-	<div
-		class="d-lg-none">
+	<div class="d-lg-none">
+		{% for locale in locales %}
+			{% if locale != app.request.locale %}
+				<li class="list-unstyled">
+					<a class="nav-link scrollto" href="{{ path('change_locale', {'locale': locale}) }}"><img src="{{ asset('img/'~locale~'.png')}}" alt="{{locale}}">
+					</a>
+				</li>
+			{% endif %}
+		{% endfor %}
 		<!-- Navbar avec icônes sur petit écran, disparait sur grand écran -->
 		<nav class="navbar navbar-expand-lg fixed-bottom navbar-dark bg-info">
 			<div class="navbar">

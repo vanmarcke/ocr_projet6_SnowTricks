@@ -5,16 +5,16 @@
 		</div>
 		<div class="portfolio-wrap">
 			{% if figure.images is empty %}
-				<img src="img\pas-d-image-disponible.jpg" class="img-fluid" alt="image par defaut">
+				<img src="img\pas-d-image-disponible.jpg" class="img-fluid" alt="{% trans %}Default picture{% endtrans %}">
 				<div class="portfolio-links">
-					<a href="{{ path('figure_show', {'slug': figure.slug}) }}" title="Détails de la figure">
+					<a href="{{ path('figure_show', {'slug': figure.slug}) }}" title="{% trans %}Figure details{% endtrans %}">
 						<i class="bx bx-link"></i>
 					</a>
 					{% if is_granted('ROLE_USER') %}
-						<a href="{{ path('figure_edit', {'slug': figure.slug}) }} " title="Editer">
+						<a href="{{ path('figure_edit', {'slug': figure.slug}) }} " title="{% trans %}Edit{% endtrans %}">
 							<i style="color: green;" class="bx bx-edit"></i>
 						</a>
-						<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="Supprimer">
+						<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="{% trans %}Remove{% endtrans %}">
 							<i style="color: red;" class="bx bx-trash"></i>
 						</a>
 						{{ include('figure/_delete_form.html.twig') }}
@@ -25,14 +25,14 @@
 					{% if loop.first %}
 						<img src="{{ image.src }}" class="img-fluid" alt="">
 						<div class="portfolio-links">
-							<a href="{{ path('figure_show', {'slug': figure.slug}) }}" title="Détails de la figure">
+							<a href="{{ path('figure_show', {'slug': figure.slug}) }}"  title="{% trans %}Figure details{% endtrans %}">
 								<i class="bx bx-link"></i>
 							</a>
 							{% if is_granted('ROLE_USER') %}
-								<a href="{{ path('figure_edit', {'slug': figure.slug}) }} " title="Editer">
+								<a href="{{ path('figure_edit', {'slug': figure.slug}) }} " title="{% trans %}Edit{% endtrans %}">
 									<i style="color: green;" class="bx bx-edit"></i>
 								</a>
-								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="Supprimer">
+								<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="{% trans %}Remove{% endtrans %}">
 									<i style="color: red;" class="bx bx-trash"></i>
 								</a>
 								{{ include('figure/_delete_form.html.twig') }}
