@@ -97,10 +97,10 @@ class FigureController extends AbstractController
             } catch (Exception) {
                 $this->addFlash('danger', 'Erreur Système : veuillez ré-essayer');
 
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('figure_edit');
             }
 
-            return $this->redirectToRoute('figure_show', [
+            return $this->redirectToRoute('figures_list', [
                 'slug' => $figure->getSlug(),
             ]);
         }
@@ -125,6 +125,6 @@ class FigureController extends AbstractController
              $this->addFlash('success', 'La figure a bien été supprimée');
          }
 
-         return $this->redirectToRoute('home');
+         return $this->redirectToRoute('figures_list');
      }
 }
