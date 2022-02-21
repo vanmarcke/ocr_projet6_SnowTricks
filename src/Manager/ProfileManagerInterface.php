@@ -13,7 +13,15 @@ interface ProfileManagerInterface
      *
      * @param FormInterface               $form               contains Form information
      * @param SnowUser                    $user               contains user information
-     * @param UserPasswordHasherInterface $userPasswordHasher contains PasswordHasher 
+     * @param UserPasswordHasherInterface $userPasswordHasher contains PasswordHasher
      */
     public function uploadProfile(FormInterface $form, SnowUser $user, UserPasswordHasherInterface $userPasswordHasher): void;
+
+    /**
+     * Method inscriptionUser.
+     *
+     * @param FormInterface $form contains Form information
+     * @param SnowUser      $user contains user information
+     */
+    public function createAvatar(FormInterface $form, SnowUser $user): void;
 }

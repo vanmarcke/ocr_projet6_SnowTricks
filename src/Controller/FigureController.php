@@ -20,11 +20,11 @@ class FigureController extends AbstractController
     #[Route('/figures/list', name: 'figures_list')]
     public function figuresList(FigureManagerInterface $figureManager): Response
     {
-        $figuresList = $figureManager->getListFigures();
+        $figureList = $figureManager->getFiguresList();
 
         return $this->render('figure/listFigures.html.twig', [
             'controller_name' => 'FigureController',
-            'figures' => $figuresList,
+            'figures' => $figureList,
         ]);
     }
 

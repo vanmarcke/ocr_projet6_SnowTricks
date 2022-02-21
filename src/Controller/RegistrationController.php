@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\SnowUser;
 use App\Form\RegistrationFormType;
+use App\Manager\ProfileManagerInterface;
 use App\Repository\SnowUserRepository;
 use App\Security\EmailVerifier;
 use DateTime;
@@ -23,16 +24,14 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    private string $imageDirAvatar;
 
-    public function __construct(EmailVerifier $emailVerifier, string $imageDirAvatar)
+    public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
-        $this->imageDirAvatar = $imageDirAvatar;
     }
 
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, ProfileManagerInterface $ProfilManager, TranslatorInterface $translator): Response
     {
         if ($this->getUser()) {
             $message = $translator->trans('You are already registered and logged in.');
@@ -56,17 +55,7 @@ class RegistrationController extends AbstractController
 
             $user->setCreatedAt(new DateTime());
 
-            $avatar = $form->get('avatar')->getData();
-            if ($avatar) {
-                $nameavatar = random_int(1, 999) . '-' . 'SnowAvatar' . '-' . $avatar->getClientOriginalName();
-                $nameavatar = str_replace(' ', '_', $nameavatar);
-                $avatar->move($this->getParameter('avatarAbsoluteDir'), $nameavatar);
-
-                $user->setAvatar(sprintf("%s/%s",$this->imageDirAvatar, $nameavatar));
-            }
-
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $ProfilManager->createAvatar($form, $user);
 
             // generate a signed url and email it to the user
             $message = $translator->trans('Please confirm your email');
