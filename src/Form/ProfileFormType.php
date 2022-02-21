@@ -29,7 +29,7 @@ class ProfileFormType extends AbstractType
             'required' => false,
             'constraints' => [
                 new File([
-                    'maxSize' => '48k',
+                    'maxSize' => '2048k',
                     'maxSizeMessage' => $this->translator->trans('The file must not be larger than 2MB'),
                 ]),
             ],
