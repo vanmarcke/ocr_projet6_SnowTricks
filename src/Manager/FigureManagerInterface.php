@@ -10,7 +10,12 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 interface FigureManagerInterface
 {
     /**
-     * Method getPublishedFigures.
+     * Method getListFigures. Contains the information of the figure
+     */
+    public function getListFigures(): array;
+
+    /**
+     * Method getPublishedFigures. Contains the information of the figure
      */
     public function getPublishedFigures(): array;
 

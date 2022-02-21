@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Manager\FigureManager;
+use App\Manager\FigureManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index(FigureManager $figureManager): Response
+    public function index(FigureManagerInterface $figureManager): Response
     {
         //list of published figures, by decreasing id
         $figuresPublished = $figureManager->getPublishedFigures();
@@ -28,7 +28,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/blockFigures', name: 'blockFigures')]
-    public function blockFigures(Request $request, FigureManager $figureManager): Response
+    public function blockFigures(Request $request, FigureManagerInterface $figureManager): Response
     {
         $numFigure = $request->query->get('numFigure');
         $figures = $figureManager->getPublishedNumFigure(5, $numFigure);
