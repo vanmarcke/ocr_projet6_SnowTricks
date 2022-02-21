@@ -15,7 +15,7 @@
 						<a class="nav-link scrollto" href="{{ path('home') }}">Accueil</a>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="#">Figures</a>
+						<a class="nav-link scrollto" href="{{ path('figures_list')}}">Figures</a>
 					</li>
 					<li>
 						{% if is_granted('ROLE_USER') %}
@@ -47,7 +47,7 @@
 				<a class="nav-link" href="{{ path('home') }}">
 					<h3 class="far fa-home"></h3>
 				</a>
-				<a class="nav-link" href="#">
+				<a class="nav-link" href="{{ path('figures_list')}}">
 					<h3 class="far fa-snowboarding"></h3>
 				</a>
 				{% if is_granted('ROLE_USER') %}

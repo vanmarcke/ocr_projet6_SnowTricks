@@ -1,4 +1,85 @@
 /*--------------------------------------------------------------
+# Hero Section new figure list
+--------------------------------------------------------------*/
+#herofigurelist {
+  width: 100%;
+  background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)), url("/public/img/hero-bg.jpg") top center;
+  background-size: cover;
+  /* position: relative; */
+  margin-bottom: -90px;
+}
+
+#herofigurelist .section-title {
+  margin-top: 100px;
+}
+
+#herofigurelist .herofigurelist-container {
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#herofigurelist h1 {
+  margin: 0 0 10px 0;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: -1px 0 2px #2f4d5a;
+}
+
+
+#herofigurelist h7 {
+  color: #c81d1d;
+  margin-bottom: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  text-shadow: -1px 0 3px #00c3ff;
+}
+
+#herofigurelist h7:hover {
+    color: #1a09e1;
+  }
+
+
+#herofigurelist td, th {
+  color: black;
+  font-weight: 700;
+  text-shadow: -1px 0 3px #00c3ff;
+}
+
+.modal-backdrop {
+  position: inherit !important;
+}
+
+@media (min-width: 1024px) {
+  #herofigurelist {
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 768px) {
+  #herofigurelist h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  #herofigurelist h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+}
+
+
+/*--------------------------------------------------------------
 # Hero Section no image
 --------------------------------------------------------------*/
 #heronoimage {
