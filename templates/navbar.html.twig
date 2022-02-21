@@ -23,7 +23,7 @@
 						</li>
 					</li>
 					<li>
-						<a class="nav-link scrollto" href="#">Profil</a>
+						<a class="nav-link scrollto" href="{{ path('app_profile')}}">Profil</a>
 					</li>
 					<li>
 						<a class="nav-link scrollto" href="{{ path('app_logout') }}">Déconnexion</a>
@@ -54,7 +54,7 @@
 					<a class="nav-link" href="{{ path('figure_new')}}">
 						<h3 class="far fa-plus-square"></h3>
 					</a>
-					<a class="nav-link" href="#">
+					<a class="nav-link" href="{{ path('app_profile')}}">
 						<h3 class="far fa-user"></h3>
 					</a>
 					<a class="nav-link" href="{{ path('app_logout') }}">
