@@ -18,7 +18,7 @@
 		{% for image in figure.images %}
 			{% if loop.first %}
 				<section id="herofigure" style="background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
-																																												url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
+					url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
 				{% endif %}
 			{% endfor %}
 			<div class="herofigure-container" data-aos="fade-up">
@@ -54,7 +54,7 @@
 							<a href="{{ path('home') }}">Home</a>
 						</li>
 						<li>
-							<a href="#">Figures</a>
+							<a href="{{ path('figures_list')}} ">Figures</a>
 						</li>
 						<li>Détails de la figure :
 							{{ figure.name }}</li>
