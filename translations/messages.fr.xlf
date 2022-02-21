@@ -561,8 +561,8 @@
         <source>Special character prohibited</source>
         <target>Caractère spécial interdit</target>
       </trans-unit>
-      <trans-unit id="qqxRKXb" resname="Y/m/d a H:i">
-        <source>Y/m/d a H:i</source>
+      <trans-unit id="4ffnN8T" resname="Y/m/d h:i a">
+        <source>Y/m/d h:i a</source>
         <target>d/m/Y à H:i</target>
       </trans-unit>
       <trans-unit id="Zv9Ug.c" resname="Submit your image">
@@ -588,6 +588,10 @@
       <trans-unit id="fEUeD0N" resname="New Password">
         <source>New Password</source>
         <target>Nouveau mot de passe</target>
+      </trans-unit>
+      <trans-unit id="mwRVe7V" resname="Y/m/d">
+        <source>Y/m/d</source>
+        <target>d/m/Y</target>
       </trans-unit>
     </body>
   </file>

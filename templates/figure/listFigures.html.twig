@@ -38,7 +38,7 @@
 											</a>
 										</td>
 										<td>{{ figure.description|striptags|slice(0, 130)|raw }}...</td>
-										<td>{{ figure.createdAt ? figure.createdAt|date('d/m/Y') : '' }}</td>
+										<td>{{ figure.createdAt ? figure.createdAt|date('Y/m/d'|trans) : '' }}</td>
 										<td>{{ figure.publish ? 'Yes'|trans : 'No'|trans }}
 										</td>
 										<td>{{ include('figure/_delete_form.html.twig') }}

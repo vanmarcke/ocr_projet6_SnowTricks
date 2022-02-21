@@ -143,13 +143,13 @@
 								<li>
 									<strong>{% trans %}Created on{% endtrans %}
 									</strong>:
-									{{ figure.createdAt|date('d-m-Y') }}</li>
+									{{ figure.createdAt|date('Y/m/d'|trans) }}</li>
 								{% if figure.editedAt %}
 									<li>
 										<strong>{% trans %}Modified on{% endtrans %}
 										</strong>
 										:
-										{{ figure.editedAt ? figure.editedAt|date('d-m-Y') : '' }}</li>
+										{{ figure.editedAt ? figure.editedAt|date('Y/m/d'|trans) : '' }}</li>
 								{% endif %}
 							</ul>
 						</div>
@@ -181,8 +181,7 @@
 											<h3>{{ comment.snowuser.username }}
 											</h3>
 											<div class="meta">{% trans %}Posted the{% endtrans %}
-												{{ comment.createdAt ? comment.createdAt|date('Y/m/d a H:i'|trans) : '' }}</div>
-												{# {{ comment.createdAt ? comment.createdAt|date('d/m/Y à H:i'|trans) : '' }}</div> #}
+												{{ comment.createdAt ? comment.createdAt|date('Y/m/d h:i a'|trans) : '' }}</div>
 											<p>{{ comment.content }}
 											</p>
 										</div>
