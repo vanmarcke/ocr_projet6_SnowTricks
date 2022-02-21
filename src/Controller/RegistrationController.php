@@ -24,7 +24,6 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-
     public function __construct(EmailVerifier $emailVerifier)
     {
         $this->emailVerifier = $emailVerifier;
