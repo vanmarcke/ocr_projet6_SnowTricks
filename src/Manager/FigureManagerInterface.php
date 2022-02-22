@@ -12,14 +12,14 @@ interface FigureManagerInterface
     /**
      * Method getListFigures. Contains the information of the figure.
      *
-     * @return array figure
+     * @return array<figure>
      */
     public function getFiguresList(): array;
 
     /**
      * Method getPublishedFigures. Contains the information of the figure.
      *
-     * @return array figure
+     * @return array<figure>
      */
     public function getPublishedFigures(): array;
 
@@ -28,7 +28,7 @@ interface FigureManagerInterface
      *
      * @param int $max limit the display to 5 thumbnails when arriving on the home page
      *
-     * @return array figure limite
+     * @return array<figure> limite
      */
     public function getPublishedFiguresLimit(int $max): array;
 
