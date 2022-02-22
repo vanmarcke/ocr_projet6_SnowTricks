@@ -593,6 +593,26 @@
         <source>Y/m/d</source>
         <target>d/m/Y</target>
       </trans-unit>
+      <trans-unit id="Wz2voqf" resname="No password reset token found in URL or session.">
+        <source>No password reset token found in URL or session.</source>
+        <target>Aucun jeton de réinitialisation du mot de passe trouvé dans l\'URL ou dans la session.</target>
+      </trans-unit>
+      <trans-unit id="voUdDIC" resname="There was a problem validating your reset request. Please try to reset your password again.">
+        <source>There was a problem validating your reset request. Please try to reset your password again.</source>
+        <target>Un problème est survenu lors de la validation de votre demande de réinitialisation. Veuillez réessayer de réinitialiser votre mot de passe</target>
+      </trans-unit>
+      <trans-unit id="DpdxMQg" resname="Your password has been changed successfully.">
+        <source>Your password has been changed successfully.</source>
+        <target>Votre mot de passe a bien été modifié.</target>
+      </trans-unit>
+      <trans-unit id="ATJ8qA9" resname="Your password reset request">
+        <source>Your password reset request</source>
+        <target>Votre demande de réinitialisation de mot de passe</target>
+      </trans-unit>
+      <trans-unit id="SDunD0V" resname="The title must contain at least 3 letters">
+        <source>The title must contain at least 3 letters</source>
+        <target>Le titre doit contenir au moins 3 lettres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
