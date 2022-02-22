@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: SnowFigureRepository::class)]
-#[UniqueEntity(fields: 'name', message: 'Cette figure est déjà enregistrée !')]
+#[UniqueEntity(fields: 'name')]
 class SnowFigure
 {
     #[ORM\Id]

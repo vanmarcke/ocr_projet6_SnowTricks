@@ -1,17 +1,20 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{% trans %}Error 500{% endtrans %}
+{% endblock %}
+
 {% block body %}
 	<!-- ======= Hero Section form ======= -->
 	<section id="hero">
 		<div class="hero-container" data-aos="fade-up">
 			<div class="section-title">
 				<h1>OOPS !!!</h1>
-				<p class="text-white font-weight-bold">Une erreur inconnue s'est produite !!!</p>
+				<p class="text-white font-weight-bold">{% trans %}An unknown error has occurred !!!{% endtrans %}</p>
 			</div>
 			<img src="\img\smiley.webp" alt="oops" width="200px">
 			<h2>
 				<a href="{{ path('home') }}">
-					<button class="btn btn-primary">Retour Acceuil</button>
+					<button class="btn btn-primary">{% trans %}Back to home{% endtrans %}</button>
 				</a>
 			</h2>
 		</div>

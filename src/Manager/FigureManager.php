@@ -23,11 +23,9 @@ class FigureManager implements FigureManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getListFigures(): array
+    public function getFiguresList(): array
     {
-        $figuresList = $this->snowFigureRepository->findBy([], ['id' => 'DESC']);
-
-        return $figuresList;
+        return $this->snowFigureRepository->findBy([], ['id' => 'DESC']);
     }
 
     /**
@@ -35,9 +33,7 @@ class FigureManager implements FigureManagerInterface
      */
     public function getPublishedFigures(): array
     {
-        $figuresPublished = $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC']);
-
-        return $figuresPublished;
+        return $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC']);
     }
 
     /**
@@ -45,9 +41,7 @@ class FigureManager implements FigureManagerInterface
      */
     public function getPublishedFiguresLimit(int $max): array
     {
-        $figuresPublishedHome = $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC'], $max);
-
-        return $figuresPublishedHome;
+        return $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC'], $max);
     }
 
     /**
@@ -55,9 +49,7 @@ class FigureManager implements FigureManagerInterface
      */
     public function getPublishedNumFigure(int $max, int $numFigure): array
     {
-        $figures = $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC'], $max, $numFigure);
-
-        return $figures;
+        return $this->snowFigureRepository->findBy(['publish' => '1'], ['id' => 'DESC'], $max, $numFigure);
     }
 
     /**
@@ -65,9 +57,7 @@ class FigureManager implements FigureManagerInterface
      */
     public function getComment(SnowFigure $snowFigure, int $offset): Paginator
     {
-        $paginator = $this->snowCommentRepository->getCommentPaginator($snowFigure, $offset);
-
-        return $paginator;
+        return $this->snowCommentRepository->getCommentPaginator($snowFigure, $offset);
     }
 
     /**

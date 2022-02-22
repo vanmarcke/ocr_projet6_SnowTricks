@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Inscription
+{% block title %}{% trans %}Registration{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -9,36 +9,36 @@
 	<div class="hero-container" data-aos="fade-up">
 
 		<div class="section-title">
-			<h1>Inscrivez vous !</h1>
+			<h1>{% trans %}Sign up!{% endtrans %}</h1>
 		</div>
 
 		<h2>
 			<a href="{{ path('app_login') }}">
-				<button class="btn btn-primary">Déjà inscrit ? Connectez-vous !</button>
+				<button class="btn btn-primary">{% trans %}Already registered ? Log in!{% endtrans %}</button>
 			</a>
 		</h2>
 		<div class="text-white font-weight-bold">
-			<p>*Champs Obligatoires</p>
+			<p>{% trans %}*Required fields{% endtrans %}</p>
 			<p>
-				Vous pouvez uploader un avatar ultérieurement</p>
+				{% trans %}You can upload an avatar later.{% endtrans %}</p>
 		</div>
 
 		<div class="col-lg-4 text-white text-left font-weight-bold">
 
 			{{ form_start(registrationForm) }}
 
-			{{ form_row(registrationForm.username, {'label': 'Pseudo*','attr': {'placeholder': 'Votre Pseudo ...'}}
+			{{ form_row(registrationForm.username, {'label': 'Pseudo*'|trans,'attr': {'placeholder': 'Your username* ...'|trans}}
 			) }}
-			{{ form_row(registrationForm.email, {'label': 'Adresse email*','attr': {'placeholder': 'Votre Adresse email ...'}}
+			{{ form_row(registrationForm.email, {'label': 'E-mail address*'|trans,'attr': {'placeholder': 'Your email address*  ...'|trans}}
 			) }}
-			{{ form_row(registrationForm.avatar, {'label': 'Votre Avatar','attr': {'placeholder': 'Charger un fichier ...'}}
+			{{ form_row(registrationForm.avatar, {'label': 'Your Avatar'|trans,'attr': {'placeholder': 'Upload file ...'|trans}}
 			) }}
 			{{ form_row(registrationForm.plainPassword) }}
 
-			{{ form_row(registrationForm.agreeTerms, {'label': 'Accepter les conditions d\'utilisation*'} ) }}
+			{{ form_row(registrationForm.agreeTerms, {'label': 'Accept the terms of use*'|trans} ) }}
 
 			<div class="blockcenter">
-				<button type="submit" class="btn btn-primary">Valider</button>
+				<button type="submit" class="btn btn-primary">{% trans %}To validate{% endtrans %}</button>
 
 				{{ form_end(registrationForm) }}
 

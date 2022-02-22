@@ -6,14 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SecurityController extends AbstractController
 {
     #[Route('/connexion', name: 'app_login')]
-     public function login(AuthenticationUtils $authenticationUtils): Response
+     public function login(AuthenticationUtils $authenticationUtils, TranslatorInterface $translator): Response
      {
          if ($this->getUser()) {
-             $this->addFlash('danger', 'Vous êtes déjà connecté.');
+            $message = $translator->trans('You are already logged.');
+             $this->addFlash('danger', $message);
 
              return $this->redirectToRoute('home');
          }

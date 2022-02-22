@@ -10,12 +10,16 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 interface FigureManagerInterface
 {
     /**
-     * Method getListFigures. Contains the information of the figure
+     * Method getListFigures. Contains the information of the figure.
+     *
+     * @return array<figure>
      */
-    public function getListFigures(): array;
+    public function getFiguresList(): array;
 
     /**
-     * Method getPublishedFigures. Contains the information of the figure
+     * Method getPublishedFigures. Contains the information of the figure.
+     *
+     * @return array<figure>
      */
     public function getPublishedFigures(): array;
 
@@ -23,6 +27,8 @@ interface FigureManagerInterface
      * Method getPublishedFiguresLimit.
      *
      * @param int $max limit the display to 5 thumbnails when arriving on the home page
+     *
+     * @return array<figure> limite
      */
     public function getPublishedFiguresLimit(int $max): array;
 
@@ -31,6 +37,8 @@ interface FigureManagerInterface
      *
      * @param int $max       Displays a maximum of 5 thumbnails on each request
      * @param int $numFigure 5 in 5 thumbnail display
+     *
+     * @return array nbr figure
      */
     public function getPublishedNumFigure(int $max, int $numFigure): array;
 
@@ -39,6 +47,8 @@ interface FigureManagerInterface
      *
      * @param SnowFigure $snowFigure Contains the information of the figure
      * @param int        $offset     Contains the comment offset count
+     *
+     * @return Paginator paging
      */
     public function getComment(SnowFigure $snowFigure, int $offset): Paginator;
 

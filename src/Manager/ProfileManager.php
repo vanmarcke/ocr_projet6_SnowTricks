@@ -47,10 +47,24 @@ class ProfileManager implements ProfileManagerInterface
             }
 
             if (!empty($new_password) || !empty($new_pseudo) || !empty($new_avatar)) {
-
                 $this->entityManager->persist($user);
                 $this->entityManager->flush();
             }
-        } 
+        }
+    }
+
+    public function createAvatar(FormInterface $form, SnowUser $user): void
+    {
+        $avatar = $form->get('avatar')->getData();
+        if ($avatar) {
+            $nameavatar = random_int(1, 999) . '-' . 'SnowAvatar' . '-' . $avatar->getClientOriginalName();
+            $nameavatar = str_replace(' ', '_', $nameavatar);
+            $avatar->move($this->avatarAbsoluteDir, $nameavatar);
+
+            $user->setAvatar(sprintf("%s/%s",$this->imageDirAvatar, $nameavatar));
+        }
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }

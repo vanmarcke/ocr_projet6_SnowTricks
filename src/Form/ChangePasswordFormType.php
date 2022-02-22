@@ -9,9 +9,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ChangePasswordFormType extends AbstractType
 {
+    public function __construct(private TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -21,22 +27,22 @@ class ChangePasswordFormType extends AbstractType
                     'attr' => ['autocomplete' => 'new-password'],
                     'constraints' => [
                         new NotBlank([
-                            'message' => 'Veuillez entrer un mot de passe',
+                            'message' => $this->translator->trans('Please enter a password'),
                         ]),
                         new Length([
                             'min' => 6,
-                            'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
+                            'minMessage' => $this->translator->trans('Your password must be at least {{ limit }} characters long.'),
                             // max length allowed by Symfony for security reasons
                             'max' => 4096,
                         ]),
                     ],
-                    'label' => 'Nouveau mot de passe',
+                    'label' => $this->translator->trans('New Password'),
                 ],
                 'second_options' => [
                     'attr' => ['autocomplete' => 'new-password'],
-                    'label' => 'Répéter le mot de passe',
+                    'label' => $this->translator->trans('Repeat password'),
                 ],
-                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
+                'invalid_message' => $this->translator->trans('Password fields must match.'),
                 // Instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
