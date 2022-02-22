@@ -26,7 +26,7 @@ Develop from A to Z the SnowTricks community site
 
 **SymfonyInsight:**
 
-[![SymfonyInsight](https://insight.symfony.com/projects/b3a17fcb-b2ec-4c03-aa3a-819a029f81c1/big.svg)](https://insight.symfony.com/projects/b3a17fcb-b2ec-4c03-aa3a-819a029f81c1)
+[![SymfonyInsight](https://insight.symfony.com/projects/6053a1ee-b6d1-4207-a44b-ae807be0c2e8/big.svg)](https://insight.symfony.com/projects/6053a1ee-b6d1-4207-a44b-ae807be0c2e8)
 
 ## Context
 
