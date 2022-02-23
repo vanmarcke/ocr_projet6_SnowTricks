@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans %}Figures: List{% endtrans %}
+{% block title %}
+	{% trans %}Figures: List{% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -18,12 +19,16 @@
 					<table class="table table-info table-striped">
 						<thead>
 							<tr>
-								<th>{% trans %}Figure name{% endtrans %}</th>
-								<th>{% trans %}Excerpt Description{% endtrans %}</th>
-								<th>{% trans %}Created on {% endtrans %}</th>
 								{% if is_granted('ROLE_USER') %}
+									<th>{% trans %}Figure name{% endtrans %}</th>
+									<th class="d-none d-lg-table-cell">{% trans %}Excerpt Description{% endtrans %}</th>
+									<th class="d-none d-lg-table-cell">{% trans %}Created on{% endtrans %}</th>
 									<th>{% trans %}Published{% endtrans %}</th>
 									<th>{% trans %}Management{% endtrans %}</th>
+								{% else %}
+									<th>{% trans %}Figure name{% endtrans %}</th>
+									<th class="d-none d-lg-table-cell">{% trans %}Excerpt Description{% endtrans %}</th>
+									<th>{% trans %}Created on{% endtrans %}</th>
 								{% endif %}
 							</tr>
 						</thead>
@@ -37,8 +42,8 @@
 												</h7>
 											</a>
 										</td>
-										<td>{{ figure.description|striptags|slice(0, 130)|raw }}...</td>
-										<td>{{ figure.createdAt ? figure.createdAt|date('Y/m/d'|trans) : '' }}</td>
+										<td class="d-none d-lg-table-cell">{{ figure.description|striptags|slice(0, 130)|raw }}...</td>
+										<td class="d-none d-lg-table-cell">{{ figure.createdAt ? figure.createdAt|date('Y/m/d'|trans) : '' }}</td>
 										<td>{{ figure.publish ? 'Yes'|trans : 'No'|trans }}
 										</td>
 										<td>{{ include('figure/_delete_form.html.twig') }}
@@ -57,7 +62,7 @@
 													</h7>
 												</a>
 											</td>
-											<td>{{ figure.description|striptags|slice(0, 155)|raw }}...</td>
+											<td class="d-none d-lg-table-cell">{{ figure.description|striptags|slice(0, 155)|raw }}...</td>
 											<td>{{ figure.createdAt ? figure.createdAt|date('d/m/Y') : '' }}</td>
 										{% endif %}
 									{% endif %}
