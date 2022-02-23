@@ -85,6 +85,7 @@ class FigureController extends AbstractController
         if (!$figure) {
             $figure = new SnowFigure();
         }
+        dump($figure);
 
         $user = $this->getUser();
         $form = $this->createForm(FigureFormType::class, $figure);
