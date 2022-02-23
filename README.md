@@ -68,7 +68,7 @@ Features available according to the different statuses:
 ### Prerequisites
 
 - Symfony CLI version v4.28.1
-- Php PHP version 8.1.1
+- PHP version 8.1.1
 - Composer version 2.2.5
 - A Google account for configuring symfony/google-mailer
 - A Management System (SGBD) type 'phpMyAdmin'
