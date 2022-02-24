@@ -53,7 +53,7 @@ Features available according to the different statuses:
 - Template URL: 'https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/'
 - PHP Version: 8.1.1
 
-## Libraries added 
+## Libraries added
 
 - symfony/google-mailer
 - symfony/rate-limiter
@@ -61,7 +61,6 @@ Features available according to the different statuses:
 - doctrine/doctrine-fixtures-bundle
 - friendsofphp/php-cs-fixer
 - symfony/var-dumper
-
 
 ## Installation
 
@@ -75,35 +74,43 @@ Features available according to the different statuses:
 
 ### Step 1: Clone your machine's repository to a folder of your choice
 
-        C:\desktop> git clone git@github.com:vanmarcke/ocr_projet6_SnowTricks.git
+```powershell
+git clone git@github.com:vanmarcke/ocr_projet6_SnowTricks.git
+```
 
-### Step 2: Configure google-mailer and database access:
+### Step 2: Configure google-mailer and database access ':'
 
 - Create an .env.local file in the root of the project.
 - In this file copy/paste the code below.
 - Modify the 'DATABASE_URL' and 'Gmail' lines by putting your database and Gmail identifiers.
 
-      `DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=mariadb-10.4.11"`
-      
-        Example: DATABASE_URL="mysql://root:@127.0.0.1:3306/snow-tricks?serverVersion=mariadb-10.4.11"
+```code
+DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=mariadb-10.4.11"
+```
 
-      ###> symfony/google-mailer ###
-      # Gmail MUST NOT be used in production, use it only in development.
-      `MAILER_DSN=gmail://USERNAME:PASSWORD@smtp.gmail.com?verify_peer=0`
-      ###< symfony/google-mailer ###
+Example: DATABASE_URL="mysql://root:@127.0.0.1:3306/snow-tricks?serverVersion=mariadb-10.4.11"
 
-        Example: MAILER_DSN=smtp://vmkdev@gmail.com:vmkdev2022!@smtp.gmail.com?verify_peer=0
+```code
+###> symfony/google-mailer ###
+# Gmail MUST NOT be used in production, use it only in development.
+MAILER_DSN=gmail://USERNAME:PASSWORD@smtp.gmail.com?verify_peer=0
+###< symfony/google-mailer ###
+```
+
+Example: MAILER_DSN=smtp://vmkdev@gmail.com:vmkdev2022!@smtp.gmail.com?verify_peer=0
 
 ### Step 3: Make sure your Apache and Mysql Modules (or others depending on your configuration) are running. In a powershell-like terminal or that of your code editor, run the command below at the root of the project
 
 This command will install all dependencies, webpack-encore-bundle, database with Fixtures dataset and start the web server
 
-      `composer run-script install-projet --dev`
+```powershell
+composer run-script install-projet --dev
+```
 
-### Step 4: The site is now functional, you can create an account with your own identifiers or use the identifiers below:
+### Step 4: The site is now functional, you can create an account with your own identifiers or use the identifiers below ':'
 
-* Pseudo: Fred
-* Password: 123456
+- Pseudo: Fred
+- Password: 123456
 
 ## Future Developments
 
