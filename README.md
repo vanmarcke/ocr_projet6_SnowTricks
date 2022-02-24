@@ -49,9 +49,8 @@ Features available according to the different statuses:
 
 ## Information
 
-- Blog Theme: Squadfree
-- Template URL: 'https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/'
-- PHP Version: 8.1.1
+- Bootstrap v5.1.3 Theme: Squadfree
+- Template URL: 'https://bootstrapmade.com/squadfree-free-bootstrap-template-creative'
 
 ## Libraries added
 
