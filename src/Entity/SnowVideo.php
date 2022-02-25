@@ -19,7 +19,7 @@ class SnowVideo
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'video')]
+    #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'videos')]
     #[ORM\JoinColumn(nullable: false)]
     private $snowFigure;
 

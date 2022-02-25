@@ -28,7 +28,7 @@ class ProfileController extends AbstractController
                 $profileManager->uploadProfile($form, $user, $userPasswordHasher);
             } catch (Exception) {
                 $message = $translator->trans('System error: please try again');
-                $this->addFlash('danger',  $message);
+                $this->addFlash('danger', $message);
 
                 return $this->redirectToRoute('home');
             }

@@ -19,7 +19,7 @@ class SnowComment
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'Comment')]
+    #[ORM\ManyToOne(targetEntity: SnowFigure::class, inversedBy: 'Comments')]
     #[ORM\JoinColumn(nullable: false)]
     private $snowFigure;
 

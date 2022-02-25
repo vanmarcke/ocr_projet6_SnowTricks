@@ -61,7 +61,7 @@ class ProfileManager implements ProfileManagerInterface
             $nameavatar = str_replace(' ', '_', $nameavatar);
             $avatar->move($this->avatarAbsoluteDir, $nameavatar);
 
-            $user->setAvatar(sprintf("%s/%s",$this->imageDirAvatar, $nameavatar));
+            $user->setAvatar(sprintf('%s/%s', $this->imageDirAvatar, $nameavatar));
         }
 
         $this->entityManager->persist($user);
