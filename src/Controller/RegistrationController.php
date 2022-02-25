@@ -93,7 +93,7 @@ class RegistrationController extends AbstractController
                 $user->getId(),
                 $user->getEmail(),
             );
-        } catch (VerifyEmailExceptionInterface ) {
+        } catch (VerifyEmailExceptionInterface) {
             $message = $translator->trans('The link to verify your email is invalid. Please request a new link');
             $this->addFlash('danger', $message);
 
