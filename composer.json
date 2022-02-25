@@ -97,8 +97,9 @@
         "test-unit": "php bin/phpunit",
 
         "scripts-descriptions": {
-            "cs-fix": "Exécute PHP-CS-Fixer dans le projet et corriges les erreurs",
-            "test-unit": "Exécute les tests provenant du dossier tests"
+            "cs-fix": "Run PHP-CS-Fixer in the project and fix errors",
+            "test-unit": "Run tests from the tests folder",
+            "install-projet": "Install dependencies, webpack-encore-bundle and database with dataset via Fixtures"
         },
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
@@ -109,6 +110,16 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "install-projet": [
+            "composer install",
+            "yarn install",
+            "yarn encore dev",
+            "php bin/console doctrine:database:drop --if-exists --force",
+            "php bin/console doctrine:database:create",
+            "php bin/console doctrine:schema:update --force",
+            "php bin/console doctrine:fixtures:load -n",
+            "symfony server:start -d"
         ]
     },
     "conflict": {
