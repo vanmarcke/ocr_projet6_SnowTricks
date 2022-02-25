@@ -77,7 +77,7 @@ Features available according to the different statuses:
 git clone git@github.com:vanmarcke/ocr_projet6_SnowTricks.git
 ```
 
-### Step 2: Configure google-mailer and database access ':'
+### Step 2: Configure google-mailer and database access
 
 - Create an .env.local file in the root of the project.
 - In this file copy/paste the code below.
@@ -106,7 +106,7 @@ This command will install all dependencies, webpack-encore-bundle, database with
 composer run-script install-projet --dev
 ```
 
-### Step 4: The site is now functional, you can create an account with your own identifiers or use the identifiers below ':'
+### Step 4: The site is now functional, you can create an account with your own identifiers or use the identifiers below
 
 - Pseudo: Fred
 - Password: 123456
