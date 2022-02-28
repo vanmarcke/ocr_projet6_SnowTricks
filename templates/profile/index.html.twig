@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}Modify the profile{% endtrans %}
+{% endblock %}
+
+
+{% block body %}
+
+	<!-- ======= Hero Section form ======= -->
+	<section id="heronewfigure">
+		<div id="portfolio" class="hero-container" data-aos="fade-up">
+
+			<div class="section-title">
+				<h1>{% trans %}Edit your Profile{% endtrans %}</h1>
+			</div>
+
+
+			<p class="text-white font-weight-bold">{{ user.username }}
+				.{% trans %}
+				Your current Avatar :{% endtrans %}</p>
+			{% if user.avatar is empty %}
+				<img src="/img/avatardefaut.jpg" class="img-fluid">
+			{% else %}
+				<img src="{{ user.avatar }}" class="img-fluid">
+			{% endif %}
+
+			<div class="col-lg-4 text-white text-left font-weight-bold mt-3">
+
+				<div class="text-white text-center font-weight-bold">
+					<p>{% trans %}*Mandatory fields to validate the changes{% endtrans %}</p>
+				</div>
+
+				{{ form_start(form) }}
+				{{ form_row(form.newavatar, {
+                label: 'Register a new avatar:'|trans }) }}
+
+				{{ form_row(form.newpseudo, {
+                label: 'Register a new Nickname:'|trans }) }}
+
+				{{ form_row(form.passwordold, {
+                label: 'Your current password*:'|trans }) }}
+
+				{{ form_row(form.newpassword.pass, {
+                label: 'Register a new Password:'|trans }) }}
+
+				{{ form_row(form.newpassword.confirm, {
+                label: 'Confirm the new password :'|trans }) }}
+
+
+				<button type="submit" class="btn-primary">{% trans %}Save{% endtrans %}</button>
+
+				{{ form_end(form) }}
+
+			</div>
+		</div>
+	</section>
+	<!-- End Hero -->
+	<main id="main"></main>
+
+{% endblock %}
+{% block textJS %}
+	<script>
+		$(document).ready(function () {
+bsCustomFileInput.init()
+})
+	</script>
+{% endblock %}

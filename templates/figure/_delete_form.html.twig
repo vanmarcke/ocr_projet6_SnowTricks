@@ -1,0 +1,26 @@
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop{{figure.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">{% trans %}Deletion of{% endtrans %} {{ figure.name}}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body mx-auto">
+				<p>{% trans %}Are you sure you want to delete this figure?{% endtrans %}</p>
+				<p></p>
+				<p>
+					<i>{% trans %}(It is possible to unpublish it only){% endtrans %}</i>
+				</p>
+				<p></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+				<form method="post" action="{{ path('figure_delete', {'slug': figure.slug}) }}">
+					<input type="hidden" name="_method" value="DELETE">
+					<button class="btn btn-danger btn buttonCard">{% trans %}Confirm{% endtrans %}</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

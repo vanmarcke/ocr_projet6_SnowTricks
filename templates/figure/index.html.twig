@@ -1,0 +1,250 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Figure{% endtrans %} / {{ figure.name }}
+{% endblock %}
+
+{% block body %}
+	{% if figure.images is empty %}
+		<section id="heronoimage">
+			<div class="heronoimage-container" data-aos="fade-up">
+				<h1>{{ figure.name }}</h1>
+				<a href="#description" class="btn-get-started scrollto">
+					<i class="bx bx-chevrons-down"></i>
+				</a>
+			</div>
+		</section>
+	{% else %}
+		<!-- ======= Hero Section ======= -->
+		{% for image in figure.images %}
+			{% if loop.first %}
+				<section id="herofigure" style="background: linear-gradient(rgba(55, 142, 181, 0.5), rgba(55, 142, 181, 0.2)),
+					url('{{ image.src }}') top center;background-size: cover;position: relative;background-attachment: fixed;">
+				{% endif %}
+			{% endfor %}
+			<div class="herofigure-container" data-aos="fade-up">
+				<h1>{{ figure.name }}
+				</h1>
+				<a href="#description" class="btn-get-started scrollto">
+					<i class="bx bx-chevrons-down"></i>
+				</a>
+			</div>
+		{% endif %}
+	</section>
+	<!-- End Hero -->
+
+	<main
+		id="main">
+		<!-- ======= Breadcrumbs Section ======= -->
+		<section id="description" class="breadcrumbs">
+			<div class="container">
+				<div class="d-flex justify-content-between align-items-center">
+					<h2>{{ figure.name }}</h2>
+					{% if is_granted('ROLE_USER') %}
+						<div>
+							<a href="{{ path('figure_edit', {'slug': figure.slug}) }}" title="Editer">
+								<i class="iconify" data-icon="bx:bx-edit" style="color: green;" data-width="25"></i>
+							</a>
+							<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="Supprimer">
+								<i class="iconify" data-icon="bx:bx-trash" style="color: red;" data-width="25"></i>
+							</a>
+						</div>
+					{% endif %}
+					<ol>
+						<li>
+							<a href="{{ path('home') }}">{% trans %}Home{% endtrans %}</a>
+						</li>
+						<li>
+							<a href="{{ path('figures_list')}} ">{% trans %}Figures{% endtrans %}</a>
+						</li>
+						<li>{% trans %}Figure details:{% endtrans %}
+							{{ figure.name }}</li>
+					</ol>
+				</div>
+			</div>
+		</section>
+		<!-- Breadcrumbs Section -->
+
+		<!-- Modal -->
+		{% include ('figure/_delete_form.html.twig') %}
+
+		<!-- ======= Figure Details Section ======= -->
+		<section id="portfolio-details" class="portfolio-details">
+			<div class="container">
+				<div class="row gy-4">
+					<div class="text-center my-1">
+						<button class="btn btn-primary text-center d-lg-none" type="button" data-toggle="collapse" data-target="#collapseIndicators" aria-expanded="false">
+							{% trans %}See pictures{% endtrans %}
+						</button>
+					</div>
+					<div class="col-lg-8 collapse dont-collapse-sm" id="collapseIndicators">
+						{% if figure.images is empty and figure.videos is empty %}
+							<img
+							class="d-block mx-auto img-responsive" src="\img\pas-d-image-disponible.jpg" alt="">
+							{# <img src="\img\pas-d-image-disponible.jpg" class="img-fluid" alt="image par défaut"> #}
+						{% else %}
+							<div id="carouselTrick" class="carousel" data-ride="carousel">
+								<div class="carousel-inner d-flex align-items-center">
+									{% for image in figure.images %}
+										<div class="carousel-item{% if loop.first %} active {% endif %}">
+											<img class="d-block mx-auto img-responsive" src="{{ image.src }}" alt="">
+										</div>
+									{% endfor %}
+									{% for video in figure.videos %}
+										<div class="carousel-item{% if figure.images is empty and loop.first %} active {% endif %}">
+											<div class="embed-responsive embed-responsive-16by9">
+												<iframe class="embed-responsive-item" src="{{ video.url }}" allowfullscreen></iframe>
+											</div>
+										</div>
+									{% endfor %}
+								</div>
+
+								<div class="carousel-indicators d-block mx-auto">
+									<div class="collapse dont-collapse-sm" id="collapseIndicators">
+										<div id="carouselIndicators" class="carousel slide" data-ride="carousel">
+											{% set i = 0 %}
+											<div class="scrolling-wrapper row flex-row flex-nowrap mt-2 pb-2">
+												{% for image in figure.images %}
+													<div class="col-2" data-target="#carouselTrick" data-slide-to="{{ i }}">
+														<img src="{{ image.src }}" class="img-fluid" alt="">
+													</div>
+													{% set i = i + 1 %}
+												{% endfor %}
+												{% set v = i %}
+												{% for video in figure.videos %}
+													{% set urlParts = ( video.url |split('embed/',2)) %}
+													{% set urlId = urlParts[1] %}
+													<div class="col-2" data-target="#carouselTrick" data-slide-to="{{ v }}">
+														<img
+														src="http://i3.ytimg.com/vi/{{ urlId }}/hqdefault.jpg" class="img-fluid" alt="">
+													{#  afficher une miniature pour chaque vidéo #}
+													</div>
+													{% set v = v + 1 %}
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					</div>
+
+					<div class="col-lg-4">
+						<div class="portfolio-info">
+							<h3>{% trans %}Figure Information{% endtrans %}</h3>
+							<ul>
+								<li>
+									<strong>{% trans %}Category{% endtrans %}
+									</strong>:
+									{{ figure.snowcategory.name }}</li>
+								<li>
+									<strong>{% trans %}Written by{% endtrans %}
+									</strong>:
+									{{ figure.snowuser.username }}</li>
+								<li>
+									<strong>{% trans %}Created on{% endtrans %}
+									</strong>:
+									{{ figure.createdAt|date('Y/m/d'|trans) }}</li>
+								{% if figure.editedAt %}
+									<li>
+										<strong>{% trans %}Modified on{% endtrans %}
+										</strong>
+										:
+										{{ figure.editedAt ? figure.editedAt|date('Y/m/d'|trans) : '' }}</li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+
+					<div class="col-lg-12">
+						<div class="portfolio-description">
+							<h2>{% trans %}Description{% endtrans %}</h2>
+							<p>{{ figure.description }}
+							</p>
+						</div>
+					</div>
+
+					<div class="pt-5">
+						{% if comments|length > 0 %}
+							<h3 class="mb-5">{% trans %}Comment(s){% endtrans %}</h3>
+							<ul class="comment-list">
+								{% for comment in comments %}
+									<li class="comment">
+										<div class="vcard bio">
+											{% if comment.snowuser.avatar is not null %}
+												<img src="{{ comment.snowuser.avatar }}" alt="Free Website Template by Free-Template.co">
+											{% else %}
+												<img src="/img/avatardefaut.jpg" alt="image par defaut">
+											{% endif %}
+										</div>
+
+										<div class="comment-body">
+											<h3>{{ comment.snowuser.username }}
+											</h3>
+											<div class="meta">{% trans %}Posted the{% endtrans %}
+												{{ comment.createdAt ? comment.createdAt|date('Y/m/d h:i a'|trans) : '' }}</div>
+											<p>{{ comment.content }}
+											</p>
+										</div>
+									</li>
+								{% endfor %}
+
+								{# Pagination comments #}
+								<hr my-1>
+								{% if previous >= 0 %}
+									<a href="{{ path('figure_show', {'slug': figure.slug, offset: previous}) }}">
+										<i class="fas fa-backward shadow-sm p-3 mb-5 bg-white rounded"></i>
+									</a>
+								{% endif %}
+								{% if next < comments|length %}
+									<a href="{{ path('figure_show', {'slug': figure.slug, offset: next }) }}">
+										<i class="fas fa-forward shadow-sm p-3 mb-5 bg-white rounded">
+											{% trans %}See more comm....{% endtrans %}</i>
+									</a>
+								{% endif %}
+							{% else %}
+								<div class="text-center text-primary">
+									<h4>{% trans %}No comments have been posted for this figure!{% endtrans %}
+										<i class="bi bi-emoji-frown"></i>
+									</h4>
+								</div>
+								<div class="text-center text-primary">
+									<h4>{% trans %}Be the first !!!{% endtrans %}
+										<i class="bi bi-emoji-smile"></i>
+									</h4>
+								</div><br>
+							{% endif %}
+						</ul>
+						<!-- END comment-list -->
+
+						<!-- formulaire d'ajout commentaire -->
+						{% if is_granted('ROLE_USER') %}
+
+							<div class="comment-form-wrap pt-5">
+								<h3 class="mb-5">{% trans %}Leave a comment :{% endtrans %}</h3>
+								{{ form_start(commentForm) }}
+								{{ form_row(commentForm.content) }}
+								<button type="submit" class="btn-primary">{% trans %}Send{% endtrans %}</button>
+								{{ form_end(commentForm) }}
+							</div>
+						{% else %}
+							<div class="text-center">
+								<a href="{{ path('app_login') }}">
+									<button class="btn-primary">{% trans %}Leave a comment ? Log in!{% endtrans %}</button>
+								</a>
+							</div>
+						{% endif %}
+						<br><br>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End Figure Details Section -->
+	</main>
+	<!-- End #main -->
+{% endblock %}
+
+{% block textJS %}
+	<script>
+		$('.carousel').carousel({interval: 240000})
+	</script>
+{% endblock %}

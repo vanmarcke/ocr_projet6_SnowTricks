@@ -1,0 +1,167 @@
+{% apply inline_css(source('@styles/email.css')) %}
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+	<head>
+		<title>
+			SnowTricks.com
+		</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div style="">
+			<div style="Margin:0px auto;max-width:600px;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+					<tbody>
+						<tr>
+							<td style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="Margin:0px auto;max-width:600px;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+					<tbody>
+						<tr>
+							<td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top;">
+								<div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+									<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+										<tr>
+											<td align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+												<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+													<tbody>
+														<tr>
+															<td style="width:89px;">
+																<img height="auto" src="https://t3.ftcdn.net/jpg/01/34/83/20/360_F_134832011_KQOIJdp1JFgktxuzFJvYV2B8OuleTc2d.jpg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="550"/>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="Margin:0px auto;max-width:600px;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+					<tbody>
+						<tr>
+							<td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top;">
+								<div class="mj-column-per-45 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+									<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+										<tr>
+											<td align="center" style="font-size:0px;padding:0px;word-break:break-word;">
+												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:18px;font-weight:500;line-height:24px;text-align:center;color:#616161;">
+													{% trans %}Welcome to SnowTricks{% endtrans %}
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td style="font-size:0px;padding:10px 25px;word-break:break-word;">
+												<p style="border-top:solid 2px #616161;font-size:1;margin:0px auto;width:45%;"></p>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="Margin:0px auto;max-width:600px;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+					<tbody>
+						<tr>
+							<td style="direction:ltr;font-size:0px;padding:0px;padding-top:30px;text-align:center;vertical-align:top;">
+								<div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+									<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+										<tr>
+											<td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
+												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:left;color:#616161;">
+													<p>{% trans %}Hello,{% endtrans %}</p>
+													<p>{% trans %}Your account has been successfully created, you can now log in with your credentials.{% endtrans %}</p>
+													<p>{% trans %}However, please confirm your email address by clicking Confirm: This link will expire in{% endtrans %}
+														{{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.</p>
+													<p style="text-align: center; margin: 3rem;">
+														<a href="{{signedUrl }}" style="background: #2daa74; color: white; text-decoration: none; padding: 1.3rem; font-weight: 600; text-transform: uppercase; border-radius: .35rem; text-align: center; width: 100%;">{% trans %}To confirm{% endtrans %}</a>
+													</p>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="Margin:0px auto;max-width:600px;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+					<tbody>
+						<tr>
+							<td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top;">
+								<div class="mj-column-per-11 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+									<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+										<tr>
+											<td align="left" style="font-size:0px;padding:10px 25px;padding-right:0px;padding-left:25px;word-break:break-word;">
+												<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
+													<tbody>
+														<tr>
+															<td style="width:41px;">
+																<img height="auto" src="https://t3.ftcdn.net/jpg/01/34/83/20/360_F_134832011_KQOIJdp1JFgktxuzFJvYV2B8OuleTc2d.jpg" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="41"/>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<div class="mj-column-per-89 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+									<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+										<tr>
+											<td align="left" style="font-size:0px;padding:0 25px;word-break:break-word;">
+												<div style="font-family:Roboto, Helvetica, sans-serif;font-size:16px;font-weight:300;line-height:24px;text-align:left;color:#616161;">
+													<p style="color:#BDBDBD; line-height: 9px">{% trans %}Sincerely the team{% endtrans %}</p>
+													<p style="font-style: italic; color:#BDBDBD; line-height: 9px">
+														SnowTricks.com
+													</p>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div style="Margin:0px auto;max-width:600px;">
+				<table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;">
+					<tbody>
+						<tr>
+							<td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top;">
+								<div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+									<table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
+										<tr>
+											<td style="font-size:0px;padding:10px 25px;word-break:break-word;">
+												<p style="border-top:solid 1px #E0E0E0;font-size:1;margin:0px auto;width:100%;"></p>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</body>
+	</body>
+</html>
+{% endapply %}

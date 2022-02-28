@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Home{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+	<!-- ======= Hero Section ======= -->
+	<section id="hero">
+		<div class="hero-container" data-aos="fade-up">
+			<h1>{% trans %}Welcome to SnowTricks {% endtrans %}</h1>
+			<h2>{% trans %}The community site that brings together all the Snowboard tricks{% endtrans %}</h2>
+			<a href="#portfolio" class="btn-get-started scrollto">
+				<i class="bx bx-chevrons-down"></i>
+			</a>
+		</div>
+	</section>
+	<!-- End Hero -->
+
+	<main
+		id="main">
+
+		<!-- ======= Figures Section ======= -->
+		<section id="portfolio" class="portfolio ">
+			<div class="container">
+				<div class="section-title" data-aos="fade-in" data-aos-delay="100">
+					<h2>{% trans %}The Figures{% endtrans %}</h2>
+				</div>
+				<div id="blockTricks" class="container my-5">
+					<div class="row">
+						{% include ('home/_blockFigures.html.twig') %}
+					</div>
+				</div>
+			</div>
+
+			{# BLOC de Figures : Voir plus #}
+			<p class="load-more">{% trans %}See more{% endtrans %}</p>
+			<input type="hidden" id="numFigure" value="0">
+			<input type="hidden" id="all" value=" {{ nbFigures }}">
+
+		</section>
+		<!-- End figures Section -->
+	</main>
+	<!-- End #main -->
+{% endblock %}
+
+
+
+{% block textJS %}
+{# Voir plus #}
+<script type="text/javascript">
+    $('.buttonUp').hide();
+    $(document).ready(function(){
+        $('.load-more').click(function(){
+            var numFigure = Number($('#numFigure').val());
+            var allcount = Number($('#all').val());
+            var figurePerPage = 5;
+            numFigure = numFigure + figurePerPage;
+
+            if(numFigure <= allcount){
+                $("#numFigure").val(numFigure);
+
+                $.ajax({
+                    url: '{{ path('blockFigures') }}',
+                    type : 'GET',
+                    data : 'numFigure=' + numFigure,
+                    success: function(response){
+                        $('.col-lg-3').last().after(response);
+                    }    
+                });
+            }
+
+            if (numFigure >= (allcount - figurePerPage)){
+            $('.load-more').hide();  
+            }
+
+            if (numFigure >= 10 ){
+            $('.buttonUp').show();  
+            }            
+        })
+    });
+</script>
+{% endblock %}

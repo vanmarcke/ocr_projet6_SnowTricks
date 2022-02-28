@@ -1,0 +1,17 @@
+{
+  "lang": "fr-FR",
+  "name": "SnowTricks",
+  "short_name": "SnowTricks",
+  "description": "The community site that brings together all the Snowboard tricks",
+  "start_url": "/https://vmkdev.com",
+  "orientation": "landscape",
+  "display": "fullscreen",
+  "background_color": "#2196f3",
+  "theme_color": "#2196f3",
+  "icons": [
+    {
+      "src": "https://vmkdev.com/images/logo_small.png",
+      "sizes": "192x192"
+    }
+  ]
+}

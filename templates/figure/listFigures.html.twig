@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% trans %}Figures: List{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+	<!-- ======= Hero Section form ======= -->
+	<section id="herofigurelist">
+		<div id="portfolio" class="herofigurelist-container" data-aos="fade-up">
+
+			<div class="section-title">
+				<h1>{% trans %}List of Figures{% endtrans %}</h1>
+			</div>
+
+			<div class="col-lg-10 text-white text-left opacity-75">
+				<div class="table-responsive">
+					<table class="table table-info table-striped">
+						<thead>
+							<tr>
+								{% if is_granted('ROLE_USER') %}
+									<th>{% trans %}Figure name{% endtrans %}</th>
+									<th class="d-none d-lg-table-cell">{% trans %}Excerpt Description{% endtrans %}</th>
+									<th class="d-none d-lg-table-cell">{% trans %}Created on{% endtrans %}</th>
+									<th>{% trans %}Published{% endtrans %}</th>
+									<th>{% trans %}Management{% endtrans %}</th>
+								{% else %}
+									<th>{% trans %}Figure name{% endtrans %}</th>
+									<th class="d-none d-lg-table-cell">{% trans %}Excerpt Description{% endtrans %}</th>
+									<th>{% trans %}Created on{% endtrans %}</th>
+								{% endif %}
+							</tr>
+						</thead>
+						<tbody>
+							{% for figure in figures %}
+								<tr>
+									{% if is_granted('ROLE_USER') %}
+										<td>
+											<a href="{{ path('figure_show', {'slug': figure.slug}) }}">
+												<h7 class="card-title">{{ figure.name }}
+												</h7>
+											</a>
+										</td>
+										<td class="d-none d-lg-table-cell">{{ figure.description|striptags|slice(0, 130)|raw }}...</td>
+										<td class="d-none d-lg-table-cell">{{ figure.createdAt ? figure.createdAt|date('Y/m/d'|trans) : '' }}</td>
+										<td>{{ figure.publish ? 'Yes'|trans : 'No'|trans }}
+										</td>
+										<td>{{ include('figure/_delete_form.html.twig') }}
+											<a href="{{ path('figure_edit', {'slug': figure.slug}) }}" title="{% trans %}Edit{% endtrans %}">
+												<i class="iconify" data-icon="bx:bx-edit" style="color: green;" data-width="25"></i>
+											</a>
+											<a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{figure.id}}" title="{% trans %}Remove{% endtrans %}">
+												<i class="iconify" data-icon="bx:bx-trash" style="color: red;" data-width="25"></i>
+											</a>
+										</td>
+									{% else %}
+										{% if figure.publish %}
+											<td>
+												<a href="{{ path('figure_show', {'slug': figure.slug}) }}">
+													<h7 class="card-title">{{ figure.name }}
+													</h7>
+												</a>
+											</td>
+											<td class="d-none d-lg-table-cell">{{ figure.description|striptags|slice(0, 155)|raw }}...</td>
+											<td>{{ figure.createdAt ? figure.createdAt|date('d/m/Y') : '' }}</td>
+										{% endif %}
+									{% endif %}
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="7">{% trans %}There are no figures{% endtrans %}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Hero -->
+	<main id="main"></main>
+{% endblock %}

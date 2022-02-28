@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Error 403{% endtrans %}
+{% endblock %}
+
+{% block body %}
+	<!-- ======= Hero Section form ======= -->
+	<section id="hero">
+		<div class="hero-container" data-aos="fade-up">
+			<div class="section-title">
+				<h1>{% trans %}Access forbidden{% endtrans %}</h1>
+			</div>
+			<img src="\img\smiley.webp" alt="oops" width="200px">
+			<h2>
+				<a href="{{ path('home') }}">
+					<button class="btn btn-primary">{% trans %}Back to home{% endtrans %}</button>
+				</a>
+			</h2>
+		</div>
+	</section>
+	<!-- End Hero -->
+	<main id="main"></main>
+{% endblock %}

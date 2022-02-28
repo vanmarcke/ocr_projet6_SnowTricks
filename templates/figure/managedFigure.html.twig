@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{% if editMode %}
+		{% trans %}Editing a Figure{% endtrans %}
+	{% else %}
+		{% trans %}Creating a Figure{% endtrans %}
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<!-- ======= Hero Section form ======= -->
+	<section id="heronewfigure">
+		<div id="portfolio" class="hero-container" data-aos="fade-up">
+
+			<div class="section-title">
+				{% if editMode %}
+					<h1>{% trans %}Editing a Figure{% endtrans %}</h1>
+				{% else %}
+					<h1>{% trans %}Creating a Figure{% endtrans %}</h1>
+				{% endif %}
+			</div>
+
+			<div class="col-lg-5 text-white text-left font-weight-bold">
+
+				{% if editMode %}
+					{{ include('figure/_form.html.twig', {'button_label': 'Validate the modification'|trans}) }}
+				{% else %}
+					{{ include('figure/_form.html.twig', {'button_label': 'Validate the creation'|trans}) }}
+				{% endif %}
+
+
+			</div>
+		</div>
+	</section>
+	<!-- End Hero -->
+	<main id="main"></main>
+{% endblock %}

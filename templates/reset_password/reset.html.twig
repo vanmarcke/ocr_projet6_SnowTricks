@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Reset your password{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+	<!-- ======= Hero Section form ======= -->
+	<section id="hero">
+		<div class="hero-container" data-aos="fade-up">
+
+			<div class="section-title">
+				<h1>{% trans %}Reset your password{% endtrans %}</h1>
+			</div>
+
+			<div class="col-lg-4 text-white text-left font-weight-bold">
+
+				{{ form_start(resetForm) }}
+				{{ form_row(resetForm.plainPassword) }}
+
+				<div class="blockcenter">
+					<button class="btn btn-primary">{% trans %}Reset your password{% endtrans %}</button>
+					{{ form_end(resetForm) }}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Hero -->
+	<main id="main"></main>
+{% endblock %}

@@ -1,0 +1,15 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        locales: '%app.locales%'
+        
+    form_themes: ["bootstrap_5_layout.html.twig"]
+
+    paths:
+        'assets/styles': styles
+
+when@test:
+    twig:
+        strict_variables: true

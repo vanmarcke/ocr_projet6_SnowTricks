@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Password reset email sent{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+	<!-- ======= Hero Section form ======= -->
+	<section id="hero">
+		<div class="hero-container" data-aos="fade-up">
+
+			<div class="section-title">
+				<h1>{% trans %}Check your email!{% endtrans %}</h1>
+			</div>
+
+			<div class="col-lg-6 text-white text-center font-weight-bold">
+				<p>
+					{% trans %}If an account matching your email address exists, an email has just been sent containing a link you can use to reset your password. This link will expire in{% endtrans %}
+					{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+				</p>
+				<p>{% trans %}If you do not receive an email, please check your spam folder or{% endtrans %}
+					<a class="text-primary" href="{{ path('app_forgot_password_request') }}">{% trans %}try again{% endtrans %}</a>.</p>
+
+			</div>
+		</div>
+	</section>
+	<!-- End Hero -->
+	<main id="main"></main>
+{% endblock %}
